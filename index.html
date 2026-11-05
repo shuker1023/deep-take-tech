@@ -575,6 +575,27 @@ ARTICLES_EN.brief = {
 var ORDER = ["brief","kimi","hy4","anchor"];
 var current = null, fsIdx = 1, FS = ["fs-sm","","fs-lg"];
 
+/* ===== 文章深链：分享锚点 → 文章内部 id（新文章只需往这里加一行） ===== */
+var ARTICLE_LINKS = {
+ "kimi-k31-pro-20261105": "kimi",
+ "tencent-hy4-20261105": "hy4",
+ "xinhua-robot-anchors-20261105": "anchor",
+ "market-close-20261105": "brief"
+};
+function anchorForId(id){
+ for (var k in ARTICLE_LINKS){ if (ARTICLE_LINKS[k] === id) return k; }
+ return null;
+}
+function idForHash(){
+ var h = (location.hash || "").replace(/^#/, "");
+ return Object.prototype.hasOwnProperty.call(ARTICLE_LINKS, h) ? ARTICLE_LINKS[h] : null;
+}
+function setHashSilently(hash){
+ /* replaceState 不改变滚动位置、也不会触发 hashchange */
+ var url = hash ? ("#" + hash) : (location.pathname + location.search);
+ try { history.replaceState(null, "", url); } catch(e){}
+}
+
 /* scroll reveal — cards fade/rise in once when they enter the viewport */
 var revealEls = document.querySelectorAll(".card:not(.lead), .briefcard, .lumina, .col-item, .sec-head");
 var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -625,6 +646,8 @@ function openArticle(id){
  var r = document.getElementById("reader");
  r.classList.add("open"); r.setAttribute("aria-hidden", "false"); r.scrollTop = 0;
  document.body.style.overflow = "hidden";
+ var anchor = anchorForId(id);
+ if (anchor) setHashSilently(anchor);
  bindOpen(body);
  updateProgress();
 }
@@ -633,6 +656,7 @@ function closeReader(){
  r.classList.remove("open"); r.setAttribute("aria-hidden", "true");
  document.body.style.overflow = "";
  current = null;
+ if (idForHash()) setHashSilently("");
 }
 function bindOpen(scope){
  scope.querySelectorAll("[data-open]").forEach(function(b){
@@ -641,6 +665,14 @@ function bindOpen(scope){
 }
 bindOpen(document);
 document.getElementById("rBack").addEventListener("click", closeReader);
+
+/* 深链：带 #锚点 打开页面时直接进对应文章；hash 变化时同步打开/关闭阅读器 */
+function openFromHash(){
+ var id = idForHash();
+ if (id){ if (current !== id) openArticle(id); }
+ else if (current) closeReader();
+}
+window.addEventListener("hashchange", openFromHash);
 document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeReader(); });
 document.getElementById("reader").addEventListener("scroll", updateProgress);
 function updateProgress(){
@@ -721,8 +753,18 @@ var I18N = {
 "foot-disc":{zh:"本站文章为科技资讯编译与点评，文中厂商自报数据均已标注口径；市场简报仅作信息梳理，不构成投资建议。本期收录 2026-11-05 三篇深读全文与当日收盘简报。",en:"Articles here are compiled tech reporting and commentary; vendor-reported figures are labelled as such. The market brief is information only, not investment advice. This issue carries the full text of the three Nov 5, 2026 deep reads and that day's closing brief."},
 "r-back":{zh:"← 返回",en:"← Back"},"r-copy":{zh:"复制摘要",en:"Copy summary"}
 };
-/* 光影速览：X 快讯存档（最新一轮 2026-11-06 01:00，窗口约 11-05 23:00 – 11-06 01:00，共 10 条在最前；其后为 2026-11-04 / 11-03 存档），已剔除 @Morris_LT */
+/* 光影速览：X 快讯存档（最新一轮 2026-11-06 03:05，共 10 条在最前；其后为 2026-11-06 01:00 轮次、2026-11-04 / 11-03 存档），已剔除 @Morris_LT */
 var LUMINA = [
+{d:"11月6日",de:"Nov 6",t:"03:05",src:"@verge",zh:"Meta 的 Meta AI 助手新增语音功能与“富有表现力”的虚拟形象。",en:"Meta's Meta AI assistant adds voice features and expressive avatars.",url:"https://x.com/verge/status/2118419334133649909"},
+{d:"11月6日",de:"Nov 6",t:"03:03",src:"@Techmeme",zh:"METR 称 Anthropic 模型能力提升速度约为 2024 年 3 月至 2025 年 10 月期间的两倍，约 80% 的加速来自内部使用 AI。",en:"METR says Anthropic's capability gains are running at about 2x the March 2024–October 2025 pace, with about 80% of the speedup from internal AI use.",url:"https://x.com/Techmeme/status/2118418761460097316"},
+{d:"11月6日",de:"Nov 6",t:"02:57",src:"@BusinessInsider",zh:"纳斯达克指数较近期高点下跌 10%，投资者不再为 AI 建设投入买单，转而追问回报何时兑现。",en:"The Nasdaq is down 10% from recent highs as investors stop paying for AI buildout and start asking when returns arrive.",url:"https://x.com/BusinessInsider/status/2118417296804765912"},
+{d:"11月6日",de:"Nov 6",t:"02:49",src:"@TechCrunch",zh:"美国政府发表联合声明，称全球大规模黑客攻击已波及食品、交通与医疗行业，构成“持续的网络威胁”。",en:"The US government says global large-scale hacking has hit food, transport and healthcare — a “persistent cyber threat.”",url:"https://x.com/TechCrunch/status/2118415328967262419"},
+{d:"11月6日",de:"Nov 6",t:"02:42",src:"@TheRegister",zh:"十年之久的 OpenSSH 认证缺陷（sshhole）使攻击者可凭超大密码在部分基于 musl 的 Linux 系统上获得 root 权限。",en:"A decade-old OpenSSH auth flaw (sshhole) lets attackers gain root on some musl-based Linux systems with an oversized password.",url:"https://x.com/TheRegister/status/2118413493045240209"},
+{d:"11月6日",de:"Nov 6",t:"02:32",src:"@BusinessInsider",zh:"迈克尔·伯里称 Anthropic 把全部身家押注在乐观预期上，自己无意持有其股份。",en:"Michael Burry says Anthropic is betting everything on optimistic expectations — he has no interest in holding its shares.",url:"https://x.com/BusinessInsider/status/2118410934695649697"},
+{d:"11月6日",de:"Nov 6",t:"02:25",src:"@verge",zh:"一批在竞选中反对 AI 公司的民主党人当选，成为 AI 企业面临的新威胁。",en:"Democrats who campaigned against AI companies won seats — a new threat for AI firms.",url:"https://x.com/verge/status/2118409267678269643"},
+{d:"11月6日",de:"Nov 6",t:"02:09",src:"@TechCrunch",zh:"Claude 推出“个人财务”功能，用户可通过 Plaid 连接银行与信用卡账户并咨询财务问题。",en:"Claude launches “personal finance”: connect bank and credit-card accounts via Plaid and ask money questions.",url:"https://x.com/TechCrunch/status/2118405254450434052"},
+{d:"11月6日",de:"Nov 6",t:"02:03",src:"@TechCrunch",zh:"OpenAI 总裁 Greg Brockman 表示，公司应在 2027 年前做好上市准备。",en:"OpenAI president Greg Brockman says the company should be ready to IPO by 2027.",url:"https://x.com/TechCrunch/status/2118403752965157108"},
+{d:"11月6日",de:"Nov 6",t:"01:09",src:"@OpenAI",zh:"OpenAI 推出 GPT-6 Cyber，称其在提升能力的同时加强对齐，是安全研究领域的重大进展，并与 Mozilla、Palo Alto Networks 等安全团队合作。",en:"OpenAI launches GPT-6 Cyber, a security model built with Mozilla, Palo Alto Networks and others.",url:"https://x.com/OpenAI/status/2118390190246879554"},
 {d:"11月6日",de:"Nov 6",t:"约 01:05",src:"@verge",zh:"微软似乎暂时仍坚持使用 Windows 11。",en:"Microsoft seems to be sticking with Windows 11 for now.",url:"https://x.com/verge/status/2118388849424634323"},
 {d:"11月6日",de:"Nov 6",t:"约 01:03",src:"@Techmeme",zh:"防务科技初创 Shield AI 融资 25 亿美元收购雷达公司 Echodyne，其中 10 亿美元为 H 轮，估值达 288 亿美元，较 3 月的 127 亿美元大幅上升。",en:"Defense tech startup Shield AI raises $2.5B to acquire radar company Echodyne, including $1B in Series H funding, at a $28.8B valuation, up sharply from $12.7B in March.",url:"https://x.com/Techmeme/status/2118388531798450615"},
 {d:"11月6日",de:"Nov 6",t:"约 00:52",src:"@Techmeme",zh:"Aina 推出带屏幕、摇杆和麦克风的“AI 戒指”，可与 AI 智能体对话、记笔记、控制 Apple TV 等。",en:"Aina launches an “AI ring” with a screen, joystick and microphone that can talk to AI agents, take notes, control Apple TV and more.",url:"https://x.com/Techmeme/status/2118385655986425856"},
@@ -1064,6 +1106,7 @@ function refreshTicker(){
   });
 }
 applyLang("en");
+openFromHash();
 tkTimer = setInterval(refreshTicker, 60000);
 refreshTicker();
 </script>
