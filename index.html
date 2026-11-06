@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light" />
 <meta name="description" content="Deep Take Tech · 2026年11月6日深读：卖得越多，欠得越多——英伟达占了标普 8%，却给客户背了 1050 亿美元的债，思科 89% 的幽灵回来了；另有全球市场收盘简报与往期深读归档。" />
 <link rel="icon" href="data:," />
-<link rel="alternate" type="application/rss+xml" title="Deep Take Tech RSS" href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="Deep Take Tech RSS" href="https://www.deeptaketech.jiaxi.uk/rss.xml" />
 <title>Deep Take Tech｜黑色星期四，半导体一天被砍掉 12%——是回调，还是新一轮熊市的第一道裂缝？</title>
 <style>
 :root{
@@ -150,9 +150,30 @@ footer .wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:baseline}
 footer .fb{font-family:var(--serif);font-weight:900;color:var(--ink);font-size:16px}
 footer .disc{width:100%;font-size:12.5px;color:var(--faint)}
 footer .foot-follow{width:100%;display:flex;gap:12px 22px;flex-wrap:wrap;align-items:center}
-footer .foot-rss{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--blue);border:1px solid var(--line);background:var(--tint);border-radius:999px;padding:5px 15px;line-height:1.6}
+footer .foot-rss{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--blue);border:1px solid var(--line);background:var(--tint);border-radius:999px;padding:5px 15px;line-height:1.6;font-family:var(--sans);font-size:13.5px;cursor:pointer}
 footer .foot-rss:hover{border-color:var(--blue);text-decoration:none}
 footer .foot-rss svg{flex:none}
+
+/* RSS subscribe dialog */
+.rss-modal{position:fixed;inset:0;z-index:130;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(17,20,24,.48);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility 0s linear .25s}
+.rss-modal.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .25s ease}
+.rss-card{background:var(--paper);border-radius:14px;box-shadow:0 18px 48px rgba(17,20,24,.22);max-width:520px;width:100%;padding:26px 28px 24px;max-height:88vh;overflow-y:auto}
+.rss-card h2{font-size:21px;font-weight:900;display:flex;align-items:center;gap:9px}
+.rss-card h2 svg{color:var(--blue);flex:none}
+.rss-card .rss-desc{font-size:14.5px;color:var(--muted);line-height:1.85;margin:10px 0 16px}
+.rss-card .rss-lab{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);margin-bottom:6px}
+.rss-addr{display:block;background:var(--tint);border:1px solid var(--line);border-radius:8px;padding:11px 13px;font-size:14px;color:var(--ink);word-break:break-all;user-select:all;line-height:1.6}
+.rss-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.rss-copy{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:10px 20px;font-size:14.5px;font-weight:700}
+.rss-copy:hover{background:#3B7CC4}
+.rss-open{display:inline-flex;align-items:center;border:1px solid var(--line);background:#fff;color:var(--blue);border-radius:8px;padding:10px 18px;font-size:14.5px;font-weight:700}
+.rss-open:hover{border-color:var(--blue);text-decoration:none}
+.rss-steps{margin:18px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--muted);line-height:1.8}
+.rss-steps li{padding:7px 0;border-top:1px solid var(--line)}
+.rss-steps b{color:var(--ink)}
+.rss-close{margin-top:18px;background:none;border:0;color:var(--muted);font-size:14px;font-weight:600;padding:4px 2px}
+.rss-close:hover{color:var(--blue)}
+@media (prefers-reduced-motion:reduce){.rss-modal{transition:none !important}}
 footer .foot-wechat{color:var(--muted)}
 footer .foot-wechat b{color:var(--ink);font-weight:700}
 footer .foot-search{color:var(--faint)}
@@ -551,7 +572,7 @@ nav.main{display:none}
 <span class="fb">Deep Take Tech</span>
 <span data-i18n="foot-cols">光影速览 / 边缘深析 / 灰度观测 / 技术侧写</span>
 <div class="foot-follow">
-<a class="foot-rss" href="/rss.xml"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg><span data-i18n="foot-rss">RSS 订阅</span></a>
+<button type="button" class="foot-rss" id="rssBtn" aria-haspopup="dialog"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg><span data-i18n="foot-rss">RSS 订阅</span></button>
 <span class="foot-wechat"><span data-i18n="foot-wechat">关注微信公众号 Deep Take Tech，每天 17:00 三篇深读 + 一份收盘简报</span> <span class="foot-search" data-i18n="foot-search">在微信搜索「Deep Take Tech」即可关注。</span></span>
 </div>
 <div class="foot-stats" id="siteStats" hidden>
@@ -572,6 +593,26 @@ nav.main{display:none}
 <button class="rbtn" id="rFont">字号 A+</button>
 </div></div>
 <article class="r-body" id="rBody"></article>
+</div>
+
+<!-- RSS subscribe dialog -->
+<div class="rss-modal" id="rssModal" role="dialog" aria-modal="true" aria-labelledby="rssTitle" aria-hidden="true">
+<div class="rss-card">
+<h2 id="rssTitle"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg><span data-i18n="rss-h">用 RSS 订阅 Deep Take Tech</span></h2>
+<p class="rss-desc" data-i18n="rss-desc">RSS 源本身是一段给阅读器读的代码，在浏览器里点开只会看到原始代码，所以这里直接给你订阅地址：复制后粘贴到你的 RSS 阅读器里添加订阅，新文章会第一时间推送到阅读器。</p>
+<div class="rss-lab" data-i18n="rss-lab">订阅地址 · FEED URL</div>
+<code class="rss-addr" id="rssAddr">https://www.deeptaketech.jiaxi.uk/rss.xml</code>
+<div class="rss-actions">
+<button type="button" class="rss-copy" id="rssCopy" data-i18n="rss-copy">复制订阅地址</button>
+<a class="rss-open" href="https://www.deeptaketech.jiaxi.uk/rss.xml" target="_blank" rel="noopener" data-i18n="rss-open">打开订阅源 ↗</a>
+</div>
+<ol class="rss-steps">
+<li data-i18n-html="rss-s1"><b>1.</b> 打开你的 RSS 阅读器（Feedly、Inoreader、NetNewsWire、Reeder 或微信里的「订阅号」类工具都可以）；</li>
+<li data-i18n-html="rss-s2"><b>2.</b> 找到「添加订阅 / Add feed」，把上面的地址粘贴进去；</li>
+<li data-i18n-html="rss-s3"><b>3.</b> 确认后即订阅成功，每天的新文章会自动出现在阅读器里。</li>
+</ol>
+<button type="button" class="rss-close" id="rssClose" data-i18n="rss-close">关闭</button>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1239,6 +1280,36 @@ document.getElementById("rCopy").addEventListener("click", function(){
  }
 });
 
+/* ===== RSS 订阅：点按钮打开站内面板，不再直跳原始 XML 代码页 ===== */
+var RSS_URL = "https://www.deeptaketech.jiaxi.uk/rss.xml";
+function openRss(){
+ var m = document.getElementById("rssModal");
+ m.classList.add("open"); m.setAttribute("aria-hidden", "false");
+ document.body.style.overflow = "hidden";
+}
+function closeRss(){
+ var m = document.getElementById("rssModal");
+ m.classList.remove("open"); m.setAttribute("aria-hidden", "true");
+ if (!current) document.body.style.overflow = "";
+}
+document.getElementById("rssBtn").addEventListener("click", openRss);
+document.getElementById("rssClose").addEventListener("click", closeRss);
+document.getElementById("rssModal").addEventListener("click", function(e){ if (e.target === this) closeRss(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeRss(); });
+document.getElementById("rssCopy").addEventListener("click", function(){
+ function done(){ toast(LANG === "en" ? "Feed URL copied — paste it into your RSS reader" : "订阅地址已复制，去阅读器里粘贴添加吧"); }
+ function fallback(){
+  var ta = document.createElement("textarea");
+  ta.value = RSS_URL; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){ toast(LANG === "en" ? "Copy failed — please select the address manually" : "复制失败，请长按或手动选取上面的地址"); }
+  document.body.removeChild(ta);
+ }
+ if(navigator.clipboard && navigator.clipboard.writeText){
+  navigator.clipboard.writeText(RSS_URL).then(done, function(){ fallback(); });
+ } else { fallback(); }
+});
+
 /* ===== 双语：默认英文，EN / 中文 一键切换全文 ===== */
 var LANG = "en";
 var I18N = {
@@ -1280,6 +1351,15 @@ var I18N = {
 "c4-h":{zh:"技术侧写",en:"Tech Profile"},"c4-p":{zh:"给一项技术或一款产品画侧面像：它真正擅长什么、短板写在哪、第一批为它付钱的人买的是什么。",en:"A side portrait of a technology or product: what it is genuinely good at, where its limits are written, and what the first people paying for it are actually buying."},
 "foot-cols":{zh:"光影速览 / 边缘深析 / 灰度观测 / 技术侧写",en:"Lumina Brief / Edge Insight / Gray Observation / Tech Profile"},
 "foot-rss":{zh:"RSS 订阅",en:"Subscribe via RSS"},
+"rss-h":{zh:"用 RSS 订阅 Deep Take Tech",en:"Subscribe to Deep Take Tech via RSS"},
+"rss-desc":{zh:"RSS 源本身是一段给阅读器读的代码，在浏览器里点开只会看到原始代码，所以这里直接给你订阅地址：复制后粘贴到你的 RSS 阅读器里添加订阅，新文章会第一时间推送到阅读器。",en:"An RSS feed is raw code meant for reader apps — opened in a browser it just shows that code. So here is the feed address itself: copy it and paste it into your RSS reader to subscribe, and new articles will arrive there as they are published."},
+"rss-lab":{zh:"订阅地址 · FEED URL",en:"FEED URL"},
+"rss-copy":{zh:"复制订阅地址",en:"Copy feed URL"},
+"rss-open":{zh:"打开订阅源 ↗",en:"Open the feed ↗"},
+"rss-s1":{zh:"<b>1.</b> 打开你的 RSS 阅读器（Feedly、Inoreader、NetNewsWire、Reeder 等都可以）；",en:"<b>1.</b> Open your RSS reader (Feedly, Inoreader, NetNewsWire, Reeder, …);"},
+"rss-s2":{zh:"<b>2.</b> 找到「添加订阅 / Add feed」，把上面的地址粘贴进去；",en:"<b>2.</b> Find “Add feed” and paste the address above;"},
+"rss-s3":{zh:"<b>3.</b> 确认后即订阅成功，每天的新文章会自动出现在阅读器里。",en:"<b>3.</b> Confirm — you are subscribed, and each day's new articles will show up in your reader."},
+"rss-close":{zh:"关闭",en:"Close"},
 "foot-wechat":{zh:"关注微信公众号 Deep Take Tech，每天 17:00 三篇深读 + 一份收盘简报",en:"Follow Deep Take Tech on WeChat for three deep reads and a market close brief every day at 17:00"},
 "foot-search":{zh:"在微信搜索「Deep Take Tech」即可关注。",en:"Search “Deep Take Tech” in WeChat to follow."},
 "stat-visitors":{zh:"访问人数",en:"Visitors"},
@@ -1362,8 +1442,15 @@ var I18N = {
 "id-meta":{zh:"数据来自印度政府新闻信息局PIB通稿（2026年11月3日）与《印度教徒报》商业线",en:"Data from the Press Information Bureau of India (November 3, 2026) and The Hindu BusinessLine"},
 "id-cap":{zh:"数据图",en:"Data chart"}
 };
-/* 光影速览：X 快讯存档（最新一轮 2026-11-06 19:04，共 4 条在最前；其后为此前各轮次存档，共 30 条），已剔除 @Morris_LT 与 @KobeissiLetter */
+/* 光影速览：X 快讯存档（最新一轮 2026-11-06 约21:06，共 7 条在最前；其后为此前各轮次存档，共 30 条），已剔除 @Morris_LT 与 @KobeissiLetter */
 var LUMINA = [
+{d:"11月6日",de:"Nov 6",t:"约 21:06",src:"TechCrunch",zh:"Underdog 发布 32MB 语音模型演示，轻量语音模型仍有实用潜力。",en:"Underdog demos a 32MB voice model — tiny voice models still show real-world promise.",url:"https://techcrunch.com/"},
+{d:"11月6日",de:"Nov 6",t:"约 21:03",src:"TechCrunch",zh:"Physicl 融资 1000 万美元，让数字世界足够真实以服务机器人训练与仿真。",en:"Physicl raises $10M to make digital worlds real enough for robot training and simulation.",url:"https://techcrunch.com/"},
+{d:"11月6日",de:"Nov 6",t:"20:10",src:"The Record (via Techmeme)",zh:"欧盟初步认定 TikTok 违反《数字服务法》，推荐算法未能防止用户被困入有害“兔子洞”。",en:"EU preliminarily finds TikTok breached the Digital Services Act, saying its recommender traps users in harmful rabbit holes.",url:"https://www.techmeme.com/"},
+{d:"11月6日",de:"Nov 6",t:"约 20:06",src:"The Verge",zh:"抗议者闯入微软阿姆斯特丹数据中心工地，欧洲出现一波针对数据中心的抗议。",en:"Protesters storm Microsoft's Amsterdam data-center construction site amid a wave of European data-center protests.",url:"https://www.theverge.com/"},
+{d:"11月6日",de:"Nov 6",t:"19:45",src:"Washington Post (via Techmeme)",zh:"消息人士称民主党正把苹果、Meta 和马斯克旗下公司列为赢得国会后早期调查目标。",en:"Democrats are reportedly lining up Apple, Meta and Musk's companies as early investigation targets if they win Congress.",url:"https://www.techmeme.com/"},
+{d:"11月6日",de:"Nov 6",t:"19:30",src:"Bloomberg (via Techmeme)",zh:"消息人士称英伟达要求东南亚客户在申请 Nvidia Cloud Partner 资格时加入可追踪其 AI 芯片位置的计划。",en:"Nvidia reportedly asks Southeast Asian customers to join a program tracking the location of its AI chips when applying for Cloud Partner status.",url:"https://www.techmeme.com/"},
+{d:"11月6日",de:"Nov 6",t:"约 19:06",src:"The Verge",zh:"AMD 首席执行官苏姿丰称“我们首先是一家数据中心公司”，此前 AMD 报告史上“最大、最赚钱”季度。",en:"AMD CEO Lisa Su says \"we are a data center company first,\" after AMD reported its biggest, most profitable quarter ever.",url:"https://www.theverge.com/"},
 {d:"11月6日",de:"Nov 6",t:"19:04",src:"@engadget",zh:"Anthropic 推出 Claude Duet：在独立虚拟机中运行、可代用户浏览操作应用，目前需加入美国候补名单并订阅付费版。",en:"Anthropic's Claude Duet runs in its own virtual machine and browses apps on your behalf; US waitlist and paid subscription required.",url:"https://x.com/engadget/status/2118660653191733431"},
 {d:"11月6日",de:"Nov 6",t:"18:42",src:"@Techmeme",zh:"马斯克称特斯拉计划 2027 年中期停产 Cybertruck，为增产 Cybercab 腾出产能（源自《金融时报》）。",en:"Musk says Tesla plans to end Cybertruck production by mid-2027 to free capacity for Cybercab (via Financial Times).",url:"https://x.com/Techmeme/status/2118654851056074941"},
 {d:"11月6日",de:"Nov 6",t:"18:37",src:"@WIRED",zh:"Greenlight Family Hub 可显示家庭日历、管理孩子家务并兼作相框，黑五前已降价。",en:"Greenlight Family Hub shows the family calendar, manages kids' chores and doubles as a photo frame; price cut ahead of Black Friday.",url:"https://x.com/WIRED/status/2118653665644834832"},
@@ -1386,14 +1473,7 @@ var LUMINA = [
 {d:"11月6日",de:"Nov 6",t:"约 08:14",src:"Thinking Machines Lab (via Techmeme)",zh:"发布 Inkling 2 Small 混合专家模型（总参数 594B、激活参数 17B）；Artificial Analysis 称其在其指数中与 Gemini 3.8 Flash（high）相当，或为中国以外最强的开源模型。",en:"Thinking Machines Lab releases Inkling 2 Small, a 594B-parameter MoE model (17B active); Artificial Analysis rates it on par with Gemini 3.8 Flash (high), possibly the strongest open model outside China.",url:"https://techmeme.com/"},
 {d:"11月6日",de:"Nov 6",t:"08:09",src:"@TechCrunch",zh:"《纽约时报》据报正洽谈以约 3.3 亿美元收购影迷社交平台 Letterboxd，A24 已退出竞购。",en:"The New York Times is reportedly in talks to acquire film-fan platform Letterboxd for about $330M; A24 has dropped out of the bidding.",url:"https://x.com/TechCrunch/status/2118495849093222726"},
 {d:"11月6日",de:"Nov 6",t:"08:03",src:"@TechCrunch",zh:"Meta、谷歌和 TikTok 起诉加州总检察长，反对一项将于明年生效、限制 16 岁以下青少年使用社交媒体的加州法律。",en:"Meta, Google and TikTok sue California's attorney general over a law taking effect next year that restricts social media use by under-16s.",url:"https://x.com/TechCrunch/status/2118494342482436583"},
-{d:"11月6日",de:"Nov 6",t:"约 07:35",src:"Unity (via Techmeme/Reuters)",zh:"据报正与包括 Silver Lake（持股 8%）在内的财团洽谈被收购事宜。",en:"Unity is reportedly in talks about a buyout by a consortium including Silver Lake (8% shareholder).",url:"https://techmeme.com/"},
-{d:"11月6日",de:"Nov 6",t:"07:19",src:"@verge",zh:"德国电信 CEO Tim Höttges 称，Starlink Mobile（星链移动业务）可能让 SpaceX 至少花费 2000 亿美元，并对马斯克进军无线运营商表示“欢迎入局”。",en:"Deutsche Telekom CEO Tim Höttges says Starlink Mobile could cost SpaceX at least $200B, while welcoming Musk's move into wireless.",url:"https://x.com/verge/status/2118483255372677332"},
-{d:"11月6日",de:"Nov 6",t:"06:46",src:"@TechCrunch",zh:"Airbnb 称其即将推出的 AI 智能体将于 2027 年上半年帮助旅客规划行程、比价、管理预订并提供全程协助。",en:"Airbnb says its upcoming AI agent will plan trips, compare prices, manage bookings and assist travelers end-to-end in the first half of 2027.",url:"https://x.com/TechCrunch/status/2118474210708205962"},
-{d:"11月6日",de:"Nov 6",t:"06:32",src:"@verge",zh:"Perplexity 推出 Teammates，像 OpenAI 的 Dots 与 Claude Duet 一样可 24/7 执行多类任务。",en:"Perplexity launches Teammates, an always-on agent that handles many kinds of tasks 24/7, in the vein of OpenAI's Dots and Claude Duet.",url:"https://x.com/verge/status/2118470672330670248"},
-{d:"11月6日",de:"Nov 6",t:"06:18",src:"@Techmeme",zh:"纳斯达克 100 跌 6%，市值蒸发创纪录的 2.3 万亿美元，费城半导体指数跌 12%，背景是民主党赢得国会后市场对 AI 交易的担忧。",en:"Nasdaq 100 fell 6%, erasing a record $2.3T in market value, while the Philadelphia Semiconductor Index dropped 12% as Democrats' congressional wins stoked AI-trade worries.",url:"https://x.com/Techmeme/status/2118467407937511425"},
-{d:"11月6日",de:"Nov 6",t:"06:16",src:"@TheRegister",zh:"AWS Kiro 又有了新身份——“机器人管理员”（bot wrangler）。",en:"AWS Kiro takes on a new role: \"bot wrangler.\"",url:"https://x.com/TheRegister/status/2118466797678850213"},
-{d:"11月6日",de:"Nov 6",t:"06:08",src:"@Techmeme",zh:"众议院三个委员会的共和党领袖要求英伟达黄仁勋就其与被指为中国资产的 Megaspeed 高管 Alice Huang 的关系作闭门简报。",en:"Republican leaders of three House committees ask Nvidia CEO Jensen Huang for a closed-door briefing on his ties to Megaspeed executive Alice Huang, described as an alleged Chinese asset.",url:"https://x.com/Techmeme/status/2118458658631938505"},
-{d:"11月6日",de:"Nov 6",t:"06:08",src:"@Techmeme",zh:"加州州参议员、AI 安全法 SB 53 作者 Scott Wiener 赢得周二选举，将接替 Pelosi 进入美国众议院，其竞选主打 AI 监管。",en:"California state senator Scott Wiener, author of AI safety law SB 53, won Tuesday's election and will succeed Pelosi in the US House, campaigning on AI regulation.",url:"https://x.com/Techmeme/status/2118457309554937979"}
+{d:"11月6日",de:"Nov 6",t:"约 07:35",src:"Unity (via Techmeme/Reuters)",zh:"据报正与包括 Silver Lake（持股 8%）在内的财团洽谈被收购事宜。",en:"Unity is reportedly in talks about a buyout by a consortium including Silver Lake (8% shareholder).",url:"https://techmeme.com/"}
 ];
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 var LUM_LIMIT = 6, LUM_EXPANDED = false;
