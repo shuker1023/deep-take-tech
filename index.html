@@ -156,6 +156,11 @@ footer .foot-rss svg{flex:none}
 footer .foot-wechat{color:var(--muted)}
 footer .foot-wechat b{color:var(--ink);font-weight:700}
 footer .foot-search{color:var(--faint)}
+.foot-stats{display:flex;gap:8px 22px;flex-wrap:wrap;width:100%;font-size:13px;color:var(--muted)}
+.foot-stats b{color:var(--ink);font-weight:700}
+.foot-stats[hidden]{display:none}
+.reads{color:var(--faint);font-size:12.5px;white-space:nowrap}
+.r-reads{color:var(--faint)}
 
 /* reader */
 .reader{position:fixed;inset:0;background:#fff;z-index:100;overflow-y:auto;display:none}
@@ -291,6 +296,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="readbtn" data-open="brief" data-i18n="brief-btn">读完整简报 →</button>
 <span class="disc" data-i18n="brief-disc">策略师观点：摩根大通认为 A 股估值与仓位已大幅重置，预计仍有 10%–15% 反弹空间。本简报仅作市场信息梳理，不构成投资建议。</span>
+<span class="reads" data-reads-for="brief"></span>
 </div>
 </div>
 </section>
@@ -309,6 +315,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="readbtn" data-open="black-thursday" data-i18n="read-7">读全文 · 约 7 分钟 →</button>
 <span class="meta" data-i18n="bt-meta">数据为11月5日美股收盘价，来源路透社</span>
+<span class="reads" data-reads-for="black-thursday"></span>
 </div>
 </div>
 <figure>
@@ -333,6 +340,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="linkbtn" data-open="dem-sweep" data-i18n="read-more">读全文 →</button>
 <span class="meta" data-i18n="ds-meta">选举结果据美联社，容量数据来自高盛与富国银行</span>
+<span class="reads" data-reads-for="dem-sweep"></span>
 </div>
 </div>
 </article>
@@ -353,6 +361,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="linkbtn" data-open="hormuz-oil" data-i18n="read-more">读全文 →</button>
 <span class="meta" data-i18n="ho-meta">数据为路透社11月5日结算价，袭击说法来自伊朗单方面宣布</span>
+<span class="reads" data-reads-for="hormuz-oil"></span>
 </div>
 </div>
 </article>
@@ -376,6 +385,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="readbtn" data-open="kimi" data-i18n="read-7">读全文 · 约 7 分钟 →</button>
 <span class="meta" data-i18n="k-meta">数据为月之暗面官方自报，未经第三方独立复核</span>
+<span class="reads" data-reads-for="kimi"></span>
 </div>
 </div>
 <figure>
@@ -399,6 +409,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="linkbtn" data-open="hy4" data-i18n="read-more">读全文 →</button>
 <span class="meta" data-i18n="mins-7">约 7 分钟</span>
+<span class="reads" data-reads-for="hy4"></span>
 </div>
 </div>
 </article>
@@ -418,6 +429,7 @@ nav.main{display:none}
 <div class="foot">
 <button class="linkbtn" data-open="anchor" data-i18n="read-more">读全文 →</button>
 <span class="meta" data-i18n="mins-7">约 7 分钟</span>
+<span class="reads" data-reads-for="anchor"></span>
 </div>
 </div>
 </article>
@@ -445,6 +457,10 @@ nav.main{display:none}
 <div class="foot-follow">
 <a class="foot-rss" href="/rss.xml"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg><span data-i18n="foot-rss">RSS 订阅</span></a>
 <span class="foot-wechat"><span data-i18n="foot-wechat">关注微信公众号 Deep Take Tech，每天 17:00 三篇深读 + 一份收盘简报</span> <span class="foot-search" data-i18n="foot-search">在微信搜索「Deep Take Tech」即可关注。</span></span>
+</div>
+<div class="foot-stats" id="siteStats" hidden>
+<span><span data-i18n="stat-visitors">访问人数</span> <b id="statUv">–</b></span>
+<span><span data-i18n="stat-today">今日访问</span> <b id="statUvToday">–</b></span>
 </div>
 <span class="disc" data-i18n="foot-disc">本站文章为科技资讯编译与点评，文中厂商自报数据均已标注口径；市场简报仅作信息梳理，不构成投资建议。本期收录 2026-11-05 三篇深读全文与当日收盘简报。</span>
 </div>
@@ -823,10 +839,11 @@ function artLoc(id){
 function openArticle(id){
  var a = artLoc(id); if(!a) return;
  current = id;
+ recordRead(id);
  var en = LANG === "en";
  var html = '<span class="tag ' + a.tagCls + '">' + a.col + '</span>' +
   '<h1>' + a.title + '</h1>' +
-  '<div class="rmeta">' + (en ? 'Deep Take Tech Editorial · ' + a.date + ' · ' + a.mins + ' min read' : 'Deep Take Tech 编辑部 · ' + a.date + ' · 约 ' + a.mins + ' 分钟读完') + '</div>' +
+  '<div class="rmeta">' + (en ? 'Deep Take Tech Editorial · ' + a.date + ' · ' + a.mins + ' min read' : 'Deep Take Tech 编辑部 · ' + a.date + ' · 约 ' + a.mins + ' 分钟读完') + ' · <span class="r-reads" data-reads-for="' + id + '"></span></div>' +
   '<p class="rdek">' + a.dek + '</p>';
  if(a.img){ html += '<figure><img src="' + a.img + '" alt="' + a.imgAlt + '" /><figcaption>' + (en ? 'Editorial illustration, not a news photo.' : '编辑部示意插画，非新闻照片。') + '</figcaption></figure>'; }
  html += a.body;
@@ -846,6 +863,7 @@ function openArticle(id){
  if (anchor) setHashSilently(anchor);
  bindOpen(body);
  updateProgress();
+ updateReadsDisplay();
 }
 function closeReader(){
  var r = document.getElementById("reader");
@@ -946,6 +964,8 @@ var I18N = {
 "foot-rss":{zh:"RSS 订阅",en:"Subscribe via RSS"},
 "foot-wechat":{zh:"关注微信公众号 Deep Take Tech，每天 17:00 三篇深读 + 一份收盘简报",en:"Follow Deep Take Tech on WeChat for three deep reads and a market close brief every day at 17:00"},
 "foot-search":{zh:"在微信搜索「Deep Take Tech」即可关注。",en:"Search “Deep Take Tech” in WeChat to follow."},
+"stat-visitors":{zh:"访问人数",en:"Visitors"},
+"stat-today":{zh:"今日访问",en:"Today"},
 "foot-disc":{zh:"本站文章为科技资讯编译与点评，文中厂商自报数据均已标注口径；市场简报仅作信息梳理，不构成投资建议。本期收录 2026-11-05 三篇深读全文与当日收盘简报。",en:"Articles here are compiled tech reporting and commentary; vendor-reported figures are labelled as such. The market brief is information only, not investment advice. This issue carries the full text of the three Nov 5, 2026 deep reads and that day's closing brief."},
 "r-back":{zh:"← 返回",en:"← Back"},"r-copy":{zh:"复制摘要",en:"Copy summary"},
 "arch-h":{zh:"往期归档",en:"Archive"},
@@ -1062,6 +1082,7 @@ function applyLang(l){
  document.getElementById("langZh").classList.toggle("on", l === "zh");
  document.getElementById("rFont").textContent = fontLabel();
  renderLumina();
+ updateReadsDisplay();
  renderTickerNote();
  if (current) openArticle(current);
 }
@@ -1327,6 +1348,57 @@ function refreshTicker(){
    tkReschedule();
   });
 }
+/* ===== 访问统计：总访问人数 / 今日访问 / 文章阅读数（Cloudflare Pages Function + KV） ===== */
+var STATS_API = "/api/stats";
+var READS = {};
+function shanghaiToday(){
+  try {
+    var p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+    var g = function(t){ for (var i=0;i<p.length;i++) if (p[i].type===t) return p[i].value; return ""; };
+    return g("year") + "-" + g("month") + "-" + g("day");
+  } catch(e){ var d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+}
+function updateReadsDisplay(){
+  document.querySelectorAll("[data-reads-for]").forEach(function(el){
+    var id = el.getAttribute("data-reads-for");
+    var n = READS[id];
+    if (n == null) return;
+    el.textContent = LANG === "en" ? (n + " reads") : ("阅读 " + n);
+  });
+}
+function updateStatsDisplay(uv, uvToday){
+  var bar = document.getElementById("siteStats"); if (!bar) return;
+  document.getElementById("statUv").textContent = uv;
+  document.getElementById("statUvToday").textContent = uvToday;
+  bar.hidden = false;
+}
+function recordVisit(){
+  var today = shanghaiToday();
+  var uvEver = null, uvDate = null;
+  try { uvEver = localStorage.getItem("dtt_uv_ever"); uvDate = localStorage.getItem("dtt_uv_date"); } catch(e){}
+  var isNew = uvEver ? "0" : "1";
+  var isNewToday = uvDate === today ? "0" : "1";
+  var url = STATS_API + "?action=visit&new=" + isNew + "&newToday=" + isNewToday + "&slugs=" + encodeURIComponent(ORDER.join(","));
+  fetch(url, { credentials: "same-origin" }).then(function(r){ return r.json(); }).then(function(d){
+    if (!d || !d.ok) return;
+    READS = d.reads || {};
+    updateReadsDisplay();
+    updateStatsDisplay(d.uvTotal, d.uvToday);
+    try { if (isNew === "1") localStorage.setItem("dtt_uv_ever", "1"); if (isNewToday === "1") localStorage.setItem("dtt_uv_date", today); } catch(e){}
+  }).catch(function(){});
+}
+function recordRead(id){
+  if (!id) return;
+  var key = "dtt_read_" + id;
+  try { if (sessionStorage.getItem(key)) return; } catch(e){}
+  fetch(STATS_API + "?action=read&slug=" + encodeURIComponent(id), { credentials: "same-origin" })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d && d.ok){ READS[id] = d.reads; updateReadsDisplay(); try { sessionStorage.setItem(key, "1"); } catch(e){} }
+    }).catch(function(){});
+}
+recordVisit();
+
 applyLang("en");
 openFromHash();
 tkTimer = setInterval(refreshTicker, 60000);
