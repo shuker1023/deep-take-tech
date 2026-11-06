@@ -1,6 +1,6 @@
-// Deep Take Tech 计数接口：总访问人数 / 今日访问人数 / 文章阅读数
+// Deep Take Tech 计数接口：总访问人数 / 今日访问人数 / 文章阅读数 / 文章点赞数
 // 部署：Cloudflare Pages Functions（随 GitHub 仓库自动部署）；持久化：KV，绑定名 STATS
-// 前端每次打开页面调 ?action=visit；打开文章调 ?action=read&slug=<文章内部 id>
+// 前端每次打开页面调 ?action=visit；打开文章调 ?action=read&slug=<文章内部 id>；点赞调 ?action=like&slug=<id>，取消点赞调 ?action=unlike&slug=<id>
 // “今日”按 Asia/Shanghai 日期算。UV 去重由前端 localStorage 控制（new=首次访问，newToday=今日首次访问）。
 // 注意：KV 没有原子自增，极端并发下可能丢 1 个计数；本站量级可忽略。
 
@@ -61,7 +61,11 @@ export async function onRequest(context) {
       if (isNew) uvTotal = await incr(kv, "uv:total");
       if (isNewToday) uvToday = await incr(kv, "uv:" + today, 172800);
       const reads = {};
-      for (const s of slugs) reads[s] = await getNum(kv, "reads:" + s);
+      const likes = {};
+      for (const s of slugs) {
+        reads[s] = await getNum(kv, "reads:" + s);
+        likes[s] = await getNum(kv, "likes:" + s);
+      }
       return new Response(
         JSON.stringify({
           ok: true,
@@ -71,6 +75,7 @@ export async function onRequest(context) {
           pvTotal,
           pvToday,
           reads,
+          likes,
         }),
         { headers }
       );
@@ -84,6 +89,26 @@ export async function onRequest(context) {
         );
       const n = await incr(kv, "reads:" + slug);
       return new Response(JSON.stringify({ ok: true, slug, reads: n }), {
+        headers,
+      });
+    }
+    if (action === "like" || action === "unlike") {
+      const slug = url.searchParams.get("slug") || "";
+      if (!slug)
+        return new Response(
+          JSON.stringify({ ok: false, error: "missing slug" }),
+          { status: 400, headers }
+        );
+      const key = "likes:" + slug;
+      let n;
+      if (action === "like") {
+        n = await incr(kv, key);
+      } else {
+        const cur = await getNum(kv, key);
+        n = Math.max(0, cur - 1);
+        await kv.put(key, String(n));
+      }
+      return new Response(JSON.stringify({ ok: true, slug, likes: n }), {
         headers,
       });
     }
