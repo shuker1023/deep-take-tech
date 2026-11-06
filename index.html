@@ -183,6 +183,35 @@ footer .foot-search{color:var(--faint)}
 .reads{color:var(--faint);font-size:12.5px;white-space:nowrap}
 .r-reads{color:var(--faint)}
 
+/* article actions: share / like / favorite */
+.actbar{display:inline-flex;align-items:center;gap:2px;margin-left:auto}
+.actbtn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;color:var(--faint);border-radius:8px;padding:5px 6px;font-size:12.5px;line-height:1;transition:color .2s ease,background-color .2s ease,border-color .2s ease}
+.actbtn:hover{color:var(--blue);background:var(--tint)}
+.actbtn svg{flex:none}
+.actbtn .cnt{font-weight:600;font-variant-numeric:tabular-nums}
+.actbtn.liked{color:var(--up)}
+.actbtn.liked svg{fill:var(--up)}
+.actbtn.faved{color:var(--blue)}
+.actbtn.faved svg{fill:var(--blue)}
+.card .foot{flex-wrap:wrap}
+.r-top .actbtn{border:1px solid var(--line);background:#fff;padding:7px 10px;color:var(--muted)}
+.r-top .actbtn:hover{border-color:var(--blue);color:var(--blue);background:#fff}
+.r-top .actbtn.liked{color:var(--up)}
+.r-top .actbtn.faved{color:var(--blue)}
+@media (max-width:640px){.r-top .wrap{flex-wrap:wrap}}
+
+/* share dialog extras (panel shell reuses .rss-modal / .rss-card) */
+.share-title{font-size:14px;color:var(--muted);line-height:1.7;margin:10px 0 2px}
+.share-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.share-opt{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:14.5px;font-weight:700;color:var(--ink);background:#fff;font-family:var(--sans);text-align:left}
+.share-opt:hover{border-color:var(--blue);color:var(--blue);text-decoration:none}
+.share-opt svg{flex:none}
+.share-wx{margin-top:18px;border-top:1px solid var(--line);padding-top:16px;text-align:center}
+.share-wx .wx-lab{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.share-qr{display:flex;justify-content:center}
+.share-qr img,.share-qr canvas{border:1px solid var(--line);border-radius:8px;padding:6px;background:#fff;max-width:100%}
+.share-wx .wx-note{font-size:12.5px;color:var(--faint);line-height:1.7;margin:10px 0 0}
+
 /* reader */
 .reader{position:fixed;inset:0;background:#fff;z-index:100;overflow-y:auto;display:none}
 .reader.open{display:block}
@@ -237,7 +266,7 @@ footer .foot-search{color:var(--faint)}
 @media (prefers-reduced-motion:reduce){
 .ticker,.topbar,.dateline,.card.lead,.reader.open .r-body,.reveal.is-visible,.ticker .dot.live,.lumina.expanded .lum-item.lum-extra{animation:none !important}
 .reveal{opacity:1 !important}
-.card,.briefcard,.col-item,.readbtn,.linkbtn,.rbtn,.reader,.r-progress,.toast{transition:none !important}
+.card,.briefcard,.col-item,.readbtn,.linkbtn,.rbtn,.reader,.r-progress,.toast,.actbtn,.share-opt{transition:none !important}
 .card:hover,.briefcard:hover,.col-item:hover,.readbtn:hover,.linkbtn:hover,.rbtn:hover{transform:none !important}
 }
 
@@ -590,6 +619,9 @@ nav.main{display:none}
 <button class="rbtn" id="rBack" data-i18n="r-back">← 返回</button>
 <span class="ttl" id="rTopTitle"></span>
 <button class="rbtn" id="rCopy" data-i18n="r-copy">复制摘要</button>
+<button class="rbtn actbtn" id="rShare" type="button" aria-label="Share"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg></button>
+<button class="rbtn actbtn" id="rLike" type="button" aria-label="Like"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg><span class="cnt" id="rLikeCount">0</span></button>
+<button class="rbtn actbtn" id="rFav" type="button" aria-label="Save"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
 <button class="rbtn" id="rFont">字号 A+</button>
 </div></div>
 <article class="r-body" id="rBody"></article>
@@ -615,8 +647,29 @@ nav.main{display:none}
 </div>
 </div>
 
+<!-- Share dialog -->
+<div class="rss-modal" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareH" aria-hidden="true">
+<div class="rss-card">
+<h2 id="shareH"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg><span data-i18n="share-h">分享这篇文章</span></h2>
+<p class="share-title" id="shareTitle"></p>
+<div class="share-opts">
+<a class="share-opt" id="shX" href="#" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg><span data-i18n="share-x">发到 X</span></a>
+<a class="share-opt" id="shTg" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg><span>Telegram</span></a>
+<a class="share-opt" id="shWa" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span>WhatsApp</span></a>
+<button type="button" class="share-opt" id="shCopy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span data-i18n="share-copy">复制链接</span></button>
+</div>
+<div class="share-wx" id="shareWx">
+<div class="wx-lab" data-i18n="share-wx">微信扫码打开</div>
+<div class="share-qr" id="shareQr"></div>
+<p class="wx-note" data-i18n="share-wx-note">微信没有网页直达分享入口：用微信扫一扫打开这篇文章，再点右上角转发；也可以复制链接，粘贴到微信里发送。</p>
+</div>
+<button type="button" class="rss-close" id="shareClose" data-i18n="share-close">关闭</button>
+</div>
+</div>
+
 <div class="toast" id="toast"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var ARTICLES = {
 "inkling-2-small": {
@@ -1223,6 +1276,7 @@ function openArticle(id){
  bindOpen(body);
  updateProgress();
  updateReadsDisplay();
+ if (typeof syncReaderActs === "function") syncReaderActs();
 }
 function closeReader(){
  var r = document.getElementById("reader");
@@ -1366,6 +1420,14 @@ var I18N = {
 "stat-today":{zh:"今日访问",en:"Today"},
 "foot-disc":{zh:"本站文章为科技资讯编译与点评，文中厂商自报数据均已标注口径；市场简报仅作信息梳理，不构成投资建议。本期收录 2026-11-06 三篇深读与当日收盘简报；往期归档收录 11 月 5 日与 6 日共八篇深读全文。",en:"Articles here are compiled tech reporting and commentary; vendor-reported figures are labelled as such. The market brief is information only, not investment advice. This issue carries three deep reads and the closing brief dated Nov 6, 2026; the archive holds the full text of eight deep reads from Nov 5–6."},
 "r-back":{zh:"← 返回",en:"← Back"},"r-copy":{zh:"复制摘要",en:"Copy summary"},
+"act-share":{zh:"分享",en:"Share"},"act-like":{zh:"喜欢",en:"Like"},"act-fav":{zh:"收藏",en:"Save"},
+"share-h":{zh:"分享这篇文章",en:"Share this article"},
+"share-x":{zh:"发到 X",en:"Post to X"},
+"share-copy":{zh:"复制链接",en:"Copy link"},"share-copied":{zh:"链接已复制，去粘贴分享吧",en:"Link copied — paste it anywhere to share"},
+"share-wx":{zh:"微信扫码打开",en:"Open in WeChat"},
+"share-wx-note":{zh:"微信没有网页直达分享入口：用微信扫一扫打开这篇文章，再点右上角转发；也可以复制链接，粘贴到微信里发送。",en:"WeChat offers no web share link: scan this code with WeChat to open the article, then tap Share — or copy the link and paste it into WeChat."},
+"share-close":{zh:"关闭",en:"Close"},
+"fav-added":{zh:"已收藏",en:"Saved"},"fav-removed":{zh:"已取消收藏",en:"Removed from saved"},
 "arch-h":{zh:"往期归档",en:"Archive"},
 "arch-note":{zh:"2026-11-05 – 11-06 · 往期八篇深读 · 全文收录",en:"Nov 5–6, 2026 · Eight past deep reads, full text"},
 "cb-title":{zh:"黑色星期四，半导体一天被砍掉 12%——是回调，还是新一轮熊市的第一道裂缝？",en:"Black Thursday Sliced 12% Off Semiconductors — Correction, or the First Crack of a New Bear?"},
@@ -1527,6 +1589,7 @@ function applyLang(l){
  document.getElementById("rFont").textContent = fontLabel();
  renderLumina();
  updateReadsDisplay();
+ if (typeof refreshActs === "function") refreshActs();
  renderTickerNote();
  if (current) openArticle(current);
 }
@@ -1826,7 +1889,9 @@ function recordVisit(){
   fetch(url, { credentials: "same-origin" }).then(function(r){ return r.json(); }).then(function(d){
     if (!d || !d.ok) return;
     READS = d.reads || {};
+    LIKES = d.likes || {};
     updateReadsDisplay();
+    if (typeof refreshActs === "function") refreshActs();
     updateStatsDisplay(d.uvTotal, d.uvToday);
     try { if (isNew === "1") localStorage.setItem("dtt_uv_ever", "1"); if (isNewToday === "1") localStorage.setItem("dtt_uv_date", today); } catch(e){}
   }).catch(function(){});
@@ -1841,6 +1906,140 @@ function recordRead(id){
       if (d && d.ok){ READS[id] = d.reads; updateReadsDisplay(); try { sessionStorage.setItem(key, "1"); } catch(e){} }
     }).catch(function(){});
 }
+/* ===== 文章操作：分享 / 喜欢 / 收藏 =====
+   分享链接用正式域名 + 文章锚点；喜欢走 /api/stats 计数（本机 localStorage 记住点过哪些）；
+   收藏只存本机 localStorage，不计数。 */
+var SITE_BASE = "https://www.deeptaketech.jiaxi.uk/";
+var LIKES = {};
+var SHARE_ID = null;
+function shareAnchorForId(id){
+  var found = null;
+  for (var k in ARTICLE_LINKS){ if (ARTICLE_LINKS[k] === id) found = k; }
+  return found || id;
+}
+function articleLink(id){ return SITE_BASE + "#" + shareAnchorForId(id); }
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function lsSet(k, on){ try { if (on) localStorage.setItem(k, "1"); else localStorage.removeItem(k); } catch(e){} }
+function isLiked(id){ return lsGet("dtt_liked_" + id) === "1"; }
+function isFaved(id){ return lsGet("dtt_fav_" + id) === "1"; }
+function copyText(text, okMsg){
+  function done(){ toast(okMsg); }
+  function fallback(){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch(e){ toast(LANG === "en" ? "Copy failed — please copy the link manually" : "复制失败，请手动复制链接"); }
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(); });
+  } else { fallback(); }
+}
+var ICON_SHARE = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/></svg>';
+var ICON_HEART = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>';
+var ICON_BM = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+function buildActbars(){
+  document.querySelectorAll(".foot [data-reads-for]").forEach(function(el){
+    var id = el.getAttribute("data-reads-for");
+    var bar = document.createElement("span");
+    bar.className = "actbar";
+    bar.innerHTML =
+      '<button type="button" class="actbtn" data-act="share" data-id="' + id + '">' + ICON_SHARE + '</button>' +
+      '<button type="button" class="actbtn" data-act="like" data-id="' + id + '">' + ICON_HEART + '<span class="cnt" data-likes-for="' + id + '">0</span></button>' +
+      '<button type="button" class="actbtn" data-act="fav" data-id="' + id + '">' + ICON_BM + '</button>';
+    el.parentNode.appendChild(bar);
+  });
+}
+function refreshActs(){
+  document.querySelectorAll("[data-likes-for]").forEach(function(el){
+    el.textContent = LIKES[el.getAttribute("data-likes-for")] || 0;
+  });
+  document.querySelectorAll("[data-act]").forEach(function(b){
+    var id = b.getAttribute("data-id"), act = b.getAttribute("data-act");
+    if (act === "like") b.classList.toggle("liked", isLiked(id));
+    if (act === "fav") b.classList.toggle("faved", isFaved(id));
+    var key = act === "share" ? "act-share" : (act === "like" ? "act-like" : "act-fav");
+    if (I18N[key]){ b.setAttribute("aria-label", I18N[key][LANG]); b.title = I18N[key][LANG]; }
+  });
+  syncReaderActs();
+}
+function syncReaderActs(){
+  var lk = document.getElementById("rLike"), fv = document.getElementById("rFav"),
+      sh = document.getElementById("rShare"), ct = document.getElementById("rLikeCount");
+  if (ct) ct.textContent = current ? (LIKES[current] || 0) : 0;
+  if (!current) return;
+  if (lk) lk.classList.toggle("liked", isLiked(current));
+  if (fv) fv.classList.toggle("faved", isFaved(current));
+  if (lk && I18N["act-like"]){ lk.setAttribute("aria-label", I18N["act-like"][LANG]); lk.title = I18N["act-like"][LANG]; }
+  if (fv && I18N["act-fav"]){ fv.setAttribute("aria-label", I18N["act-fav"][LANG]); fv.title = I18N["act-fav"][LANG]; }
+  if (sh && I18N["act-share"]){ sh.setAttribute("aria-label", I18N["act-share"][LANG]); sh.title = I18N["act-share"][LANG]; }
+}
+function toggleLike(id){
+  if (!id) return;
+  var was = isLiked(id);
+  lsSet("dtt_liked_" + id, !was);
+  LIKES[id] = Math.max(0, (LIKES[id] || 0) + (was ? -1 : 1));
+  refreshActs();
+  fetch(STATS_API + "?action=" + (was ? "unlike" : "like") + "&slug=" + encodeURIComponent(id), { credentials: "same-origin" })
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if (d && d.ok && typeof d.likes === "number"){ LIKES[id] = d.likes; refreshActs(); } })
+    .catch(function(){});
+}
+function toggleFav(id){
+  if (!id) return;
+  var now = !isFaved(id);
+  lsSet("dtt_fav_" + id, now);
+  refreshActs();
+  toast(I18N[now ? "fav-added" : "fav-removed"][LANG]);
+}
+document.addEventListener("click", function(e){
+  var b = e.target && e.target.closest ? e.target.closest("[data-act]") : null;
+  if (!b) return;
+  var id = b.getAttribute("data-id"), act = b.getAttribute("data-act");
+  if (act === "share") openShare(id);
+  else if (act === "like") toggleLike(id);
+  else if (act === "fav") toggleFav(id);
+});
+document.getElementById("rShare").addEventListener("click", function(){ if (current) openShare(current); });
+document.getElementById("rLike").addEventListener("click", function(){ if (current) toggleLike(current); });
+document.getElementById("rFav").addEventListener("click", function(){ if (current) toggleFav(current); });
+
+/* 分享面板：与 RSS 面板同一套模态逻辑 */
+function openShare(id){
+  var a = artLoc(id); if (!a) return;
+  SHARE_ID = id;
+  var link = articleLink(id), title = a.title;
+  document.getElementById("shareTitle").textContent = title;
+  var eu = encodeURIComponent(link), et = encodeURIComponent(title);
+  document.getElementById("shX").href = "https://twitter.com/intent/tweet?text=" + et + "&url=" + eu;
+  document.getElementById("shTg").href = "https://t.me/share/url?url=" + eu + "&text=" + et;
+  document.getElementById("shWa").href = "https://wa.me/?text=" + encodeURIComponent(title + " " + link);
+  var qr = document.getElementById("shareQr");
+  qr.innerHTML = "";
+  var hasQr = false;
+  if (typeof QRCode !== "undefined"){
+    try { new QRCode(qr, { text: link, width: 148, height: 148, correctLevel: QRCode.CorrectLevel.M }); hasQr = true; } catch(e){}
+  }
+  document.getElementById("shareWx").style.display = hasQr ? "" : "none";
+  var m = document.getElementById("shareModal");
+  m.classList.add("open"); m.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+function closeShare(){
+  var m = document.getElementById("shareModal");
+  m.classList.remove("open"); m.setAttribute("aria-hidden", "true");
+  if (!current) document.body.style.overflow = "";
+}
+document.getElementById("shareClose").addEventListener("click", closeShare);
+document.getElementById("shareModal").addEventListener("click", function(e){ if (e.target === this) closeShare(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeShare(); });
+document.getElementById("shCopy").addEventListener("click", function(){
+  if (!SHARE_ID) return;
+  copyText(articleLink(SHARE_ID), I18N["share-copied"][LANG]);
+});
+buildActbars();
+refreshActs();
+
 recordVisit();
 
 applyLang("en");
