@@ -325,7 +325,7 @@ nav.main{display:none}
 
 <!-- 光影速览：X 快讯 -->
 <section class="blk" id="lumina" style="margin-top:24px">
-<div class="sec-head"><h2 data-i18n="lum-h">光影速览</h2><span class="en">LUMINA BRIEF</span><span class="note" data-i18n="lum-note">X 科技快讯存档 · 2026-11-03 – 11-07 · 按时间倒序</span></div>
+<div class="sec-head"><h2 data-i18n="lum-h">光影速览</h2><span class="en">LUMINA BRIEF</span><span class="note" data-i18n="lum-note">X 科技快讯存档 · 2026-11-03 – 11-08 · 按时间倒序</span></div>
 <div class="lumina" id="luminaList"></div>
 <button type="button" class="lum-more" id="lumMore" style="display:none"></button>
 <p style="font-size:12px;color:var(--faint);margin:10px 2px 0" data-i18n="lum-foot">来源为 X 公开账号主页与 Techmeme 聚合页；@Morris_LT 的个人推文不收录于本栏目。</p>
@@ -1771,7 +1771,7 @@ var I18N = {
 "brand-sub":{zh:"于信息边缘，看见技术本影",en:"At the edge, lumina reveals the truth."},
 "nav-lumina":{zh:"光影速览",en:"Lumina Brief"},"nav-brief":{zh:"收盘简报",en:"Closing Brief"},"nav-today":{zh:"今日三篇",en:"Today's Three"},"nav-cols":{zh:"栏目",en:"Columns"},
 "dateline":{zh:"2026 年 11 月 7 日 · 星期六",en:"Saturday, November 7, 2026"},"dateline-sub":{zh:"今日 3 篇深读 · 全文收录",en:"3 deep reads today · Full text included"},
-"lum-h":{zh:"光影速览",en:"Lumina Brief"},"lum-note":{zh:"X 科技快讯存档 · 2026-11-03 – 11-07 · 按时间倒序",en:"Tech flashes collected from X · Nov 3–7, 2026 · Newest first"},
+"lum-h":{zh:"光影速览",en:"Lumina Brief"},"lum-note":{zh:"X 科技快讯存档 · 2026-11-03 – 11-08 · 按时间倒序",en:"Tech flashes collected from X · Nov 3–8, 2026 · Newest first"},
 "lum-foot":{zh:"来源为 X 公开账号主页与 Techmeme 聚合页；@Morris_LT 的个人推文不收录于本栏目。",en:"Sourced from public X account pages and Techmeme roundups; @Morris_LT's personal posts are not included in this column."},
 "brief-h":{zh:"全球市场收盘简报",en:"Global Market Closing Brief"},"brief-note":{zh:"2026-11-07 · 美股与亚太均取 11 月 6 日收盘 · 11 月 7 日周六休市",en:"2026-11-07 · US and Asia-Pacific at the Nov 6 close · Sat Nov 7: markets closed"},
 "brief-t":{zh:"美股反弹，亚太补跌",en:"US bounces, Asia plays catch-up lower"},
@@ -1964,8 +1964,14 @@ var I18N = {
 "rc-meta":{zh:"数据来自DeepMind官方公告、Interesting Engineering、AI Frontier Post（2026年11月6日）",en:"Data from DeepMind's official announcement, Interesting Engineering and AI Frontier Post (November 6, 2026)"},
 "rc-cap":{zh:"数据图",en:"Data chart"}
 };
-/* 光影速览：X 快讯存档（最新一轮 2026-11-07 15:02，共 5 条新条目在最前；其后为此前各轮次存档，共 30 条），已剔除 @Morris_LT 与 @KobeissiLetter 的推文 */
+/* 光影速览：X 快讯存档（最新一轮 2026-11-08 ~07:10，共 2 条新条目在最前；其后为此前各轮次存档，共 30 条），已剔除 @Morris_LT 与 @KobeissiLetter 的推文 */
 var LUMINA = [
+{d:"11月8日",de:"Nov 8",t:"07:10",src:"Engadget, Jackson Chen",zh:"Anthropic 刚推出的 Claude 个人理财功能对上 OpenAI 的 ChatGPT Finances：两者都通过 Plaid 只读接入银行账户；关键差异在隐私——Claude 默认不拿理财对话训练模型、解绑即遗忘数据，ChatGPT 则需手动关闭训练选项、解绑后 30 天内删除同步数据；Claude 无广告或赞助推荐。",en:"Anthropic's new Claude Personal Finance takes on OpenAI's ChatGPT Finances: both link bank accounts read-only via Plaid. The key split is privacy — Claude doesn't train on finance chats by default and forgets your data on unlink; ChatGPT needs a manual opt-out and deletes synced data within 30 days of disconnect. Claude carries no ads or sponsored picks.",url:"https://www.engadget.com/2310182/claude-vs-chatgpt-personal-finance-comparison/"},
+{d:"11月8日",de:"Nov 8",t:"04:45",src:"Engadget, Alec Hively",zh:"GPU 供应危机看不到尽头：AI 数据中心抢占内存产能；摩根大通预计到 2026 年底 DRAM 价格较 2024 年上涨 400%，RTX 5090 售价 4920 美元、远高于 1999 美元建议价；AI 数据中心今年将消耗全球约 70% 的 DRAM；SK 海力士 CEO 称明年将是行业供应史上最糟糕的一年，产能缺口至少持续到 2030 年。",en:"There is no end in sight for the GPU supply problem: AI data centers are gobbling up memory. JPMorgan expects DRAM prices up 400% since 2024 by end-2026; the RTX 5090 sells for $4,920 vs a $1,999 MSRP. AI data centers will consume ~70% of global DRAM this year; SK Hynix's CEO calls next year the worst supply year in industry history, with the shortfall running to at least 2030.",url:"https://www.engadget.com/2309554/gpu-supply-problem-no-end-in-sight/"},
+{d:"11月7日",de:"Nov 7",t:"约 20:30",src:"The Verge, Robert Hart",zh:"新报告称 AI 正大幅加速 Anthropic 自身的研究开发，这与该公司呼吁放慢 AI 发展形成反差，令研究者担忧。",en:"A new report says AI is sharply accelerating Anthropic's own research and development — a contrast with the company's calls to slow AI down that has researchers worried.",url:"https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development"},
+{d:"11月7日",de:"Nov 7",t:"约 19:44",src:"Sayan Chakraborty / Nikkei Asia via Techmeme",zh:"Nasscom 主席 Rajesh Nambiar 警告，AI 可能使印度应届工程毕业生更难找到工作，呼吁立即改革计算机科学课程。",en:"Nasscom chair Rajesh Nambiar warns AI could make it harder for India's fresh engineering graduates to find jobs, calling for an immediate overhaul of computer-science curricula.",url:"https://www.techmeme.com/"},
+{d:"11月7日",de:"Nov 7",t:"约 15:35",src:"Omdia via Techmeme",zh:"2026 年 Q3 全球平板出货量同比跌 23% 至 3200 万台，近三年最低；苹果 iPad 出货量同比跌 27.5% 至约 1158 万台。",en:"Global tablet shipments fell 23% year-on-year in Q3 2026 to 32 million units, the lowest in nearly three years; Apple iPad shipments dropped 27.5% to about 11.58 million.",url:"https://www.techmeme.com/"},
+{d:"11月7日",de:"Nov 7",t:"约 15:35",src:"Gillian Tett / Financial Times via Techmeme",zh:"东西方对 AI 的悲观情绪差异显著，背后是经济、政策与文化因素。",en:"The West and China diverge sharply in pessimism about AI, shaped by economic, policy and cultural factors.",url:"https://www.techmeme.com/"},
 {d:"11月7日",de:"Nov 7",t:"15:02",src:"Techmeme",zh:"Censys 推出 AI 研究基础设施 ARTEX，可规模化分析全球互联网数据。",en:"Censys launches ARTEX, an AI research infrastructure for analyzing global internet data at scale.",url:"https://www.techmeme.com/"},
 {d:"11月7日",de:"Nov 7",t:"14:36",src:"Techmeme",zh:"深圳非法芯片市场在 APEC 会议前清场，商家清理英伟达芯片、删除广告。",en:"Ahead of APEC, Shenzhen's grey-market chip bazaars were cleared out, with vendors removing Nvidia chips and deleting ads.",url:"https://www.techmeme.com/"},
 {d:"11月7日",de:"Nov 7",t:"14:26",src:"Techmeme",zh:"华为推出搭载鸿蒙系统的秦韵 HM650 台式机等产品。",en:"Huawei launches HarmonyOS-powered Qinyun HM650 desktop and other products.",url:"https://www.techmeme.com/"},
@@ -1989,13 +1995,7 @@ var LUMINA = [
 {d:"11月7日",de:"Nov 7",t:"约 02:35",src:"The Verge",zh:"Meta 在 Muse 中推出 Spaces，可为购物、学习、音乐等场景定制协作空间。",en:"Meta launches Spaces in Muse, customizable collaborative spaces for shopping, learning, music and more.",url:"https://www.theverge.com/"},
 {d:"11月7日",de:"Nov 7",t:"约 02:00",src:"Bloomberg via Techmeme",zh:"微软结束向 Oracle 租用 AI 算力容量的交易，Oracle 股价跌约 5%，较纪录高位已跌 68%。",en:"Microsoft ends its deal to rent AI compute capacity from Oracle; Oracle falls ~5% and is now 68% below its record high.",url:"https://www.techmeme.com/"},
 {d:"11月7日",de:"Nov 7",t:"约 01:30",src:"NBC News via Techmeme",zh:"美国司法部起诉 3 名外国公民，指控其利用 AI 冒充大公司 CEO 和律师，涉案金额超 1.29 亿美元。",en:"US DOJ charges three foreign nationals for using AI to impersonate CEOs and lawyers in a fraud worth over $129 million.",url:"https://www.techmeme.com/"},
-{d:"11月7日",de:"Nov 7",t:"01:32",src:"The Verge",zh:"Kobo 将推出付费订阅 Kobo Stack，可上传同步自有电子书。",en:"Kobo will launch Kobo Stack, a paid subscription to upload and sync your own ebooks.",url:"https://www.theverge.com/"},
-{d:"11月7日",de:"Nov 7",t:"01:24",src:"The Verge",zh:"苹果称 iPhone Duo 已有超 10 万个优化应用，但部分应用仍有问题。",en:"Apple says iPhone Duo already has over 100,000 optimized apps, though some still have issues.",url:"https://www.theverge.com/"},
-{d:"11月7日",de:"Nov 7",t:"01:19",src:"The Verge",zh:"Gentle Monster 预告其 Android XR 智能眼镜 11 月 12 日开启预订。",en:"Gentle Monster teases Android XR smart glasses, with pre-orders opening November 12.",url:"https://www.theverge.com/"},
-{d:"11月7日",de:"Nov 7",t:"01:00",src:"The Verge, Helen Li",zh:"AI 已成为约会中的新“dealbreaker”话题。",en:"AI is the new dating dealbreaker.",url:"https://www.theverge.com/"},
-{d:"11月7日",de:"Nov 7",t:"00:58",src:"Engadget, Lawrence Bonk",zh:"美国司法部新设“超级智能工作组”，负责防止该技术被国内外不良行为者操纵。",en:"The US Justice Department has launched a \"Super Intelligence Task Force\" to stop the technology from being manipulated by bad actors, foreign or domestic.",url:"https://www.engadget.com/"},
-{d:"11月7日",de:"Nov 7",t:"00:53",src:"TechCrunch, Tim De Chant",zh:"五角大楼向电池初创公司 6K 提供 2.5 亿美元贷款。",en:"The Pentagon is lending $250M to battery startup 6K.",url:"https://techcrunch.com/"},
-{d:"11月7日",de:"Nov 7",t:"00:50",src:"The Verge, Jay Peters",zh:"继 Apple Music 换标后，Apple Music Classical 也换为黑白新标志。",en:"Apple Music Classical gets a new black-and-white logo, too.",url:"https://www.theverge.com/"}
+{d:"11月7日",de:"Nov 7",t:"01:32",src:"The Verge",zh:"Kobo 将推出付费订阅 Kobo Stack，可上传同步自有电子书。",en:"Kobo will launch Kobo Stack, a paid subscription to upload and sync your own ebooks.",url:"https://www.theverge.com/"}
 ];
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 var LUM_LIMIT = 6, LUM_EXPANDED = false;
