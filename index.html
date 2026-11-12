@@ -384,7 +384,7 @@ nav.main{display:none}
 <div class="sec-head"><h2 data-i18n="lum-h">光影速览</h2><span class="en">LUMINA BRIEF</span><span class="note" data-i18n="lum-note">X 科技快讯存档 · 2026-11-03 – 11-13 · 按时间倒序</span></div>
 <div class="lumina" id="luminaList"></div>
 <button type="button" class="lum-more" id="lumMore" style="display:none"></button>
-<p style="font-size:12px;color:var(--faint);margin:10px 2px 0" data-i18n="lum-foot">来源为 X 公开账号主页与 Techmeme 聚合页；@Morris_LT 的个人推文不收录于本栏目。</p>
+<p style="font-size:12px;color:var(--faint);margin:10px 2px 0" data-i18n="lum-foot">来源为 X 公开账号主页与 Techmeme 聚合页。</p>
 </section>
 
 <!-- 收盘简报 -->
@@ -4260,7 +4260,7 @@ var I18N = {
 "nav-lumina":{zh:"光影速览",en:"Lumina Brief"},"nav-brief":{zh:"收盘简报",en:"Closing Brief"},"nav-today":{zh:"今日三篇",en:"Today's Three"},"nav-cols":{zh:"栏目",en:"Columns"},
 "dateline":{zh:"2026 年 11 月 12 日 · 星期四",en:"Thursday, November 12, 2026"},"dateline-sub":{zh:"今日 3 篇深读 · 全文收录",en:"3 deep reads today · Full text included"},
 "lum-h":{zh:"光影速览",en:"Lumina Brief"},"lum-note":{zh:"X 科技快讯存档 · 2026-11-03 – 11-13 · 按时间倒序",en:"Tech flashes collected from X · Nov 3–13, 2026 · Newest first"},
-"lum-foot":{zh:"来源为 X 公开账号主页与 Techmeme 聚合页；@Morris_LT 的个人推文不收录于本栏目。",en:"Sourced from public X account pages and Techmeme roundups; @Morris_LT's personal posts are not included in this column."},
+"lum-foot":{zh:"来源为 X 公开账号主页与 Techmeme 聚合页。",en:"Sourced from public X account pages and Techmeme roundups."},
 "brief-h":{zh:"全球市场收盘简报",en:"Global Market Closing Brief"},"brief-note":{zh:"2026-11-12 · 美股取 11 月 11 日收盘 · 亚太取 11 月 12 日收盘",en:"2026-11-12 · US at the Nov 11 close · Asia-Pacific at the Nov 12 close"},
 "brief-t":{zh:"美股纳指涨1.6%，英伟达盘后跌超10%；A股放量普跌，创业板跌2.44%",en:"Nasdaq up 1.6%, then Nvidia down over 10% after hours; A-shares fell broadly, the ChiNext down 2.44%"},
 "brief-one":{zh:"全球市场演了一出\"白天涨、晚上跌\"：美股白天靠CoreWeave财报点火、纳指涨1.6%，收盘后英伟达董事会逼宫的消息一出，盘后跌超10%，亚太午后跳水与之同频。A股放量1.93万亿却普跌，创业板跌2.44%，说明资金在兑现前期涨幅、而不是恐慌出逃。真正的考验在今晚美股开盘：英伟达的跌幅会不会从盘后延续到日盘，纳指能不能扛住。",en:"Global markets played \"up in the day, down at night\" — US stocks rallied on CoreWeave's earnings, the Nasdaq up 1.6%, then Nvidia's boardroom news sent it down more than 10% after hours, and Asia's afternoon slide moved in sync. A-shares fell on 1.93 trillion yuan of turnover, the ChiNext down 2.44% — money taking profits on earlier gains, not panic selling. The real test comes at tonight's US open: whether Nvidia's after-hours drop carries into the regular session, and whether the Nasdaq can hold."},
@@ -4633,8 +4633,14 @@ var I18N = {
 "rc-meta":{zh:"数据来自DeepMind官方公告、Interesting Engineering、AI Frontier Post（2026年11月6日）",en:"Data from DeepMind's official announcement, Interesting Engineering and AI Frontier Post (November 6, 2026)"},
 "rc-cap":{zh:"数据图",en:"Data chart"}
 };
-/* 光影速览：X 快讯存档（最新一轮 2026-11-13 凌晨，新增 8 条在最前；其后为此前各轮次存档，共 30 条），已剔除 @Morris_LT 与 @KobeissiLetter 的推文 */
+/* 光影速览：X 快讯存档（最新一轮 2026-11-13 凌晨，新增 6 条在最前；其后为此前各轮次存档，共 30 条） */
 var LUMINA = [
+{d:"11月13日",de:"Nov 13",t:"04:42",src:"The Verge",zh:"微软 365 出现宕机，Outlook、Teams 等服务因“负载过高”无法访问。",en:"Microsoft 365 outage: Outlook, Teams and other services unreachable amid \"excessive load.\"",url:"https://www.theverge.com/"},
+{d:"11月13日",de:"Nov 13",t:"04:35",src:"TechCrunch",zh:"路透报道称黄仁勋与英伟达另一名员工有婚外情，为其被曝的第三段婚外情。",en:"Reuters: Jensen Huang had an affair with another Nvidia employee — his third reported extramarital relationship.",url:"https://techcrunch.com/"},
+{d:"11月13日",de:"Nov 13",t:"04:32",src:"Bloomberg via Techmeme",zh:"SpaceX 与特斯拉合并谈判正推进，最早或于 2026 年 12 月或 2027 年初宣布，规模约 3.5 万亿美元，或为史上最大合并。",en:"SpaceX and Tesla are advancing merger talks that could be announced as early as December, a ~$3.5T deal that would be the largest ever.",url:"https://techmeme.com/"},
+{d:"11月13日",de:"Nov 13",t:"04:05",src:"TechCrunch",zh:"谷歌搜索升级，承诺对最复杂的问题给出更好的答案。",en:"Google Search gets an upgrade, promising better answers to the hardest questions.",url:"https://techcrunch.com/"},
+{d:"11月13日",de:"Nov 13",t:"03:39",src:"Reuters via Techmeme",zh:"Kalshi 终止了与小特朗普的顾问合同，此前其风投公司增持了 Polymarket 的股份。",en:"Kalshi ended its advisory contract with Donald Trump Jr. after his VC firm increased its stake in Polymarket.",url:"https://techmeme.com/"},
+{d:"11月13日",de:"Nov 13",t:"03:35",src:"Google Antigravity via Techmeme",zh:"Antigravity 新增 Orchestrator，可在 Carbon、Hydrogen 等模型之间动态切换。",en:"Google's Antigravity adds Orchestrator, dynamically switching between models like Carbon and Hydrogen.",url:"https://techmeme.com/"},
 {d:"11月13日",de:"Nov 13",t:"03:04",src:"TechCrunch",zh:"微软 Outlook 再次出现服务中断。微软 Outlook 邮箱再次出现新的服务中断。",en:"Microsoft Outlook suffers another service outage. Microsoft's Outlook email service is hit by another outage.",url:"https://techcrunch.com/"},
 {d:"11月13日",de:"Nov 13",t:"02:59",src:"The Verge",zh:"舒默：黄仁勋即便辞职仍须就国会质询作答。参议员舒默表示，黄仁勋即便辞职仍须就国会质询作答，英伟达与特朗普政府均需说明已知国家安全风险。",en:"Schumer: Huang must still answer Congress even if he resigns. Senator Schumer says Jensen Huang must still answer Congress even if he resigns, and Nvidia and the Trump administration must explain known national security risks.",url:"https://www.theverge.com/"},
 {d:"11月13日",de:"Nov 13",t:"02:43",src:"Techmeme",zh:"谷歌发布 Gemini 4 Hydrogen，面向快速执行的智能体工作流。谷歌发布 Gemini 4 Hydrogen，面向快速执行的智能体工作流，输入价 1.50 美元/百万 token、输出价 7.50 美元/百万 token，即日起在 Gemini 应用、搜索、AI Studio 与 API 全面上线。",en:"Google launches Gemini 4 Hydrogen for fast agentic workflows. Google launches Gemini 4 Hydrogen, built for rapid execution across agentic workflows, priced at $1.50 per million input tokens and $7.50 per million output tokens, rolling out across the Gemini app, Search, AI Studio and the API.",url:"https://www.techmeme.com/"},
@@ -4659,12 +4665,6 @@ var LUMINA = [
 {d:"11月12日",de:"Nov 12",t:"20:44",src:"TechCrunch",zh:"SE3 完成 3000 万美元 A 轮融资，Accel 领投，为 AI 系统开发空间智能平台。",en:"SE3 raised a $30M Series A led by Accel to build a spatial-intelligence platform for AI systems.",url:"https://techcrunch.com/2026/11/12/se3-spatial-intelligence-ai/"},
 {d:"11月12日",de:"Nov 12",t:"20:34",src:"Australian Financial Review",zh:"量子计算公司 Q-Ctrl 以超 10 亿美元估值融资 2.9 亿美元。",en:"Quantum computing startup Q-Ctrl raised $290M at a valuation above $1B.",url:"https://www.afr.com/technology/quantum-computing-startup-q-ctrl-raises-290m-at-1b-valuation-20261112-p5nf8n"},
 {d:"11月12日",de:"Nov 12",t:"20:19",src:"Bloomberg",zh:"美国商品期货交易委员会计划允许在 Kalshi 上交易加密货币与股票永续合约。",en:"The CFTC plans to allow perpetual crypto and stock contracts to trade on Kalshi.",url:"https://www.bloomberg.com/news/articles/2026-11-12/cftc-plans-to-allow-perpetual-crypto-and-stock-trades-on-kalshi"},
-{d:"11月12日",de:"Nov 12",t:"20:10",src:"Kyiv Post",zh:"泽连斯基称已与马斯克会面，乌军已获准使用 Starshield，但速度受限。",en:"Zelenskyy said he met Musk and Ukraine's military has been cleared to use Starshield, though speeds are limited.",url:"https://www.kyivpost.com/post/63714"},
-{d:"11月12日",de:"Nov 12",t:"20:04",src:"The Verge",zh:"谷歌推出实验性 AI 平台 Tabletop，可搭建可定制、协作式个人规划与协调中心，现以候补名单形式开放 Beta。",en:"Google launched Tabletop, an experimental AI platform for building customizable, collaborative personal planning hubs, now in waitlisted beta.",url:"https://www.theverge.com/tech/1031526/google-tabletop-ai-experiment-waitlist-availability"},
-{d:"11月12日",de:"Nov 12",t:"20:00",src:"Financial Times",zh:"英伟达员工对黄仁勋婚外情消息感到震惊，部分人感到愤怒（背景为当日董事会物色接班人的报道）。",en:"Nvidia employees are said to be shocked and some angered by news of Jensen Huang's affair, amid reports the board is seeking a successor.",url:"https://www.techmeme.com/"},
-{d:"11月12日",de:"Nov 12",t:"19:49",src:"Bloomberg",zh:"中方称美方应停止编造所谓“中国间谍”说法以作为施加技术限制的借口，特朗普与习近平将于下周会面。",en:"China said the US should stop fabricating 'Chinese spy' claims as a pretext for tech restrictions, as Trump and Xi are set to meet next week.",url:"https://www.bloomberg.com/news/articles/2026-11-12/china-warns-us-against-fabricating-spy-narrative-as-trump-xi-meet"},
-{d:"11月12日",de:"Nov 12",t:"18:55",src:"Wall Street Journal",zh:"中芯国际三季度营收同比增长 34% 至约 31.9 亿美元，净利润同比增长 123% 至约 4.284 亿美元，毛利率 29.9% 高于 26%–28% 的指引。",en:"SMIC's Q3 revenue rose 34% year on year to about $3.19B and net profit jumped 123% to about $428M, with a 29.9% gross margin beating its 26%–28% guidance.",url:"https://www.wsj.com/business/earnings/smic-q3-revenue-up-34-4e3fe3b9"},
-{d:"11月12日",de:"Nov 12",t:"18:45",src:"Bloomberg",zh:"伦敦无人载具制造商 Uforce 完成 7 亿美元融资，由英国国家财富基金与 Valor Equity 共同领投，估值 60 亿美元。",en:"London unmanned-vehicle maker Uforce raised $700M co-led by the UK National Wealth Fund and Valor Equity at a $6B valuation.",url:"https://www.bloomberg.com/news/articles/2026-11-12/london-based-uforce-raises-700-million-at-a-6-billion-valuation"},
 ];
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 var LUM_LIMIT = 6, LUM_EXPANDED = false;
