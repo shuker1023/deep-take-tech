@@ -391,7 +391,7 @@ nav.main{display:none}
 
 <!-- 光影速览：X 快讯 -->
 <section class="blk" id="lumina" style="margin-top:24px">
-<div class="sec-head"><h2 data-i18n="lum-h">光影速览</h2><span class="en">LUMINA BRIEF</span><span class="note" data-i18n="lum-note">X 科技快讯存档 · 2026-11-03 – 11-22 · 按时间倒序</span></div>
+<div class="sec-head"><h2 data-i18n="lum-h">光影速览</h2><span class="en">LUMINA BRIEF</span><span class="note" data-i18n="lum-note">X 科技快讯存档 · 2026-11-03 – 11-23 · 按时间倒序</span></div>
 <div class="lumina" id="luminaList"></div>
 <button type="button" class="lum-more" id="lumMore" style="display:none"></button>
 <p style="font-size:12px;color:var(--faint);margin:10px 2px 0" data-i18n="lum-foot">来源为 X 公开账号主页与 Techmeme 聚合页。</p>
@@ -3772,7 +3772,7 @@ var I18N = {
 "brand-sub":{zh:"于信息边缘，看见技术本影",en:"At the edge, lumina reveals the truth."},
 "nav-lumina":{zh:"光影速览",en:"Lumina Brief"},"nav-brief":{zh:"收盘简报",en:"Closing Brief"},"nav-today":{zh:"今日三篇",en:"Today's Three"},"nav-cols":{zh:"栏目",en:"Columns"},
 "dateline":{zh:"2026 年 11 月 22 日 · 星期日",en:"Sunday, November 22, 2026"},"dateline-sub":{zh:"今日 3 篇深读 · 全文收录",en:"3 deep reads today · Full text included"},
-"lum-h":{zh:"光影速览",en:"Lumina Brief"},"lum-note":{zh:"X 科技快讯存档 · 2026-11-03 – 11-22 · 按时间倒序",en:"Tech flashes collected from X · Nov 3–22, 2026 · Newest first"},
+"lum-h":{zh:"光影速览",en:"Lumina Brief"},"lum-note":{zh:"X 科技快讯存档 · 2026-11-03 – 11-23 · 按时间倒序",en:"Tech flashes collected from X · Nov 3–23, 2026 · Newest first"},
 "lum-foot":{zh:"来源为 X 公开账号主页与 Techmeme 聚合页。",en:"Sourced from public X account pages and Techmeme roundups."},
 "brief-h":{zh:"全球市场收盘简报",en:"Global Market Closing Brief"},"brief-note":{zh:"2026-11-22 · 美股取 11 月 20 日（周五）收盘 · 亚太取 11 月 20 日收盘（今日周日休市）",en:"Nov 22, 2026 · US: Nov 20 (Fri) close · Asia-Pacific: Nov 20 close (markets closed Sun)"},
 "brief-t":{zh:"周日休市沿用周五收盘：纳指抹去年内涨幅，创业板较6月高点跌超49%；比特币周末跌至约55,500美元",en:"Sunday close, Friday's numbers stand: Nasdaq erases its 2026 gains, ChiNext down over 49% from its June high; Bitcoin falls to about $55,500 over the weekend"},
@@ -4439,8 +4439,14 @@ var I18N = {
 "arch-more-h":{zh:"更早的文章 · 归档页",en:"Earlier reads · Archive pages"},
 "arch-more-note":{zh:"全文在归档页，点标题打开",en:"Full text on the archive pages — tap a title to open"}
 };
-/* 光影速览：X 快讯存档（最新一轮 2026-11-22 晚间，新增 6 条在最前；其后为此前各轮次存档，共 30 条） */
+/* 光影速览：X 快讯存档（最新一轮 2026-11-23 01:47，新增 6 条在最前；其后为此前各轮次存档，共 30 条） */
 var LUMINA = [
+{d:"11月23日",de:"Nov 23",t:"约 02:25",src:"Techmeme / Jakub Pachocki, OpenAI",zh:"OpenAI 公布其模型的困惑度指标并呼吁以此为依据限制模型能力扩张节奏，警告按该指标推算 2027 年可能出现 AI 能力激增。",en:"OpenAI published a perplexity-based gauge of model capability and urged pacing capability growth by it, warning it points to a sharp AI capability jump in 2027.",url:"https://techmeme.com/"},
+{d:"11月23日",de:"Nov 23",t:"约 02:24",src:"TechCrunch / Anthony Ha",zh:"数据中心正成为大型科技公司遭遇公众反弹的焦点。",en:"Data centers are becoming the focal point of public backlash against Big Tech.",url:"https://techcrunch.com/"},
+{d:"11月23日",de:"Nov 23",t:"约 01:25",src:"The Verge / Terrence O'Brien",zh:"《以撒的结合》开发者称此前不知道新版本使用了 AI 音乐，已将其从 Repentance Plus 中移除。",en:"The Binding of Isaac developer said he did not know the new version used AI-generated music and has removed it from Repentance Plus.",url:"https://www.theverge.com/"},
+{d:"11月23日",de:"Nov 23",t:"约 01:24",src:"TechCrunch / Kirsten Korosec",zh:"TechCrunch Mobility 探讨出行场景中机器人与人类的 A/B 对比测试。",en:"TechCrunch Mobility looks at A/B testing robots against humans in mobility scenarios.",url:"https://techcrunch.com/"},
+{d:"11月23日",de:"Nov 23",t:"约 01:20",src:"Techmeme / Reuters",zh:"消息称 Anthropic 为防 IPO 信息泄密，将部分承销银行限制为四人团队、使用带日志的查看平台，并要求其六个月内不得为竞争对手提供咨询。",en:"Anthropic is reportedly limiting some IPO underwriting banks to four-person teams and logged viewing platforms to prevent leaks, and barring them from advising rivals for six months.",url:"https://techmeme.com/"},
+{d:"11月22日",de:"Nov 22",t:"约 22:50",src:"Techmeme / Jonah Weiner, New York Times",zh:"报道称 Jony Ive 等硅谷人士把“品味”视为抵御 AI 粗制内容的护城河，并探讨 AI 能否学会品味。",en:"Jony Ive and other Silicon Valley figures see \"taste\" as a moat against AI slop — and ask whether AI can learn taste.",url:"https://techmeme.com/"},
 {d:"11月22日",de:"Nov 22",t:"约 21:00",src:"The Verge / David Pierce",zh:"氛围编程（vibe-coding）革命正从软件走向电视、相机等各类硬件小工具。",en:"The vibe-coding revolution is moving from software to hardware gadgets like TVs and cameras.",url:"https://www.theverge.com/column/1039139/vibe-coding-gadgets-tv-camera"},
 {d:"11月22日",de:"Nov 22",t:"21:00",src:"The Verge / Jennifer Pattison Tuohy",zh:"苹果首款智能显示屏 HomeView 音质不错、是好用的触屏音乐控制器，但 CarPlay 应用体验混乱、存在诸多限制。",en:"Apple's first smart display, HomeView, sounds good and works well as a touchscreen music controller — but its CarPlay apps are messy and limited.",url:"https://www.theverge.com/tech/1038713/apple-homeview-audio-smart-speaker-spotify-airplay"},
 {d:"11月22日",de:"Nov 22",t:"19:01",src:"Financial Times，经 Techmeme",zh:"专家称 AI 让针对工业设备的网络攻击策划变得更快，因为它能帮攻击者快速阅读设备手册并研究历史事故。",en:"Experts say AI is speeding up the planning of cyberattacks on industrial equipment, helping attackers read device manuals and study past incidents fast.",url:"https://www.ft.com/content/3cf882c6-0be6-43f5-b01e-b6f765686c8b"},
@@ -4465,12 +4471,6 @@ var LUMINA = [
 {d:"11月22日",de:"Nov 22",t:"00:50",src:"TechCrunch",zh:"AI 智能体正进入短信场景。",en:"AI agents are moving into text messaging.",url:"https://techcrunch.com/"},
 {d:"11月21日",de:"Nov 21",t:"约 23:50",src:"The Verge / Terrence O'Brien",zh:"Korg 为 Phase8 原声“合成器”推出网页版伴侣应用，可在浏览器内编排序列、调参与更新固件。",en:"Korg ships a web companion app for the Phase8 acoustic \"synth\" — sequence, tweak and update firmware in the browser.",url:"https://www.theverge.com/"},
 {d:"11月21日",de:"Nov 21",t:"约 23:26",src:"The Verge / Terrence O'Brien",zh:"Todoist 推出导入工具，接纳因微软计划 2027 年 6 月 30 日停用 To Do 而受影响的用户。",en:"Todoist launches an import tool for users as Microsoft sunsets To Do on June 30, 2027.",url:"https://www.theverge.com/"},
-{d:"11月21日",de:"Nov 21",t:"23:10",src:"New York Times / Rhodium，经 Techmeme",zh:"Rhodium 研究称中国大型科技公司 2026 年资本开支将翻倍至 1390 亿美元，其中 AI 实验室收入占比不到 8%，这一缺口比芯片管制更值得关注。",en:"China's big tech capex will double to $139B in 2026, yet AI labs earn under 8% of revenue — a gap that matters more than chip curbs.",url:"https://www.techmeme.com/"},
-{d:"11月21日",de:"Nov 21",t:"约 23:01",src:"The Verge / Nilay Patel",zh:"视频分析探讨 Anthropic 在上市后能否负担得起把安全放在首位。",en:"Video analysis: can Anthropic afford to put safety first after going public?",url:"https://www.theverge.com/"},
-{d:"11月21日",de:"Nov 21",t:"约 21:59",src:"The Verge / Stevie Bonifield",zh:"Chess.com 在 AI 改变棋类玩法后推出经典游戏新中心，扩展至麻将、数独等 11 款经典游戏。",en:"Chess.com launches a classic-games hub — mahjong, sudoku and nine more — as AI reshapes chess.",url:"https://www.theverge.com/"},
-{d:"11月21日",de:"Nov 21",t:"约 21:58",src:"Engadget",zh:"谷歌 Gemini Notebook 可把研究资料变成可交互网站。",en:"Google's Gemini Notebook turns research material into interactive websites.",url:"https://www.engadget.com/"},
-{d:"11月21日",de:"Nov 21",t:"20:00",src:"The Verge / Andrew J. Hawkins",zh:"Harbinger 在做支撑经济运转的“不性感”电动商用车，而非噱头车型。",en:"Harbinger builds unsexy electric commercial vehicles that keep the economy moving.",url:"https://www.theverge.com/"},
-{d:"11月21日",de:"Nov 21",t:"约 08:30",src:"@oracle / Techmeme",zh:"甲骨文称已为与 OpenAI 的基础设施合同获得全部所需资金，私人供应商融资只是额外选项。",en:"Oracle says it has secured all funding needed for its OpenAI infrastructure contract; private supplier financing is only an extra option.",url:"https://www.techmeme.com/"},
 ];
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
 var LUM_LIMIT = 6, LUM_EXPANDED = false;
