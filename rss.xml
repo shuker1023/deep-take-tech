@@ -2,6 +2,34 @@
 <rss version="2.0">
 <channel>
 <item>
+<title>下一代千问正在自研芯片上训练：阿里的全栈赌局摊牌了</title>
+<link>https://www.deeptaketech.jiaxi.uk/#alibaba-qwen-thead-20261122</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#alibaba-qwen-thead-20261122</guid>
+<pubDate>Sun, 22 Nov 2026 17:00:00 +0800</pubDate>
+<description>Alibaba's AI cloud revenue reached 60.97 billion yuan in Q3, up 53%, with AI product revenue of 17.92 billion yuan growing triple-digit for a 13th straight quarter; CEO Eddie Wu said the next Qwen is being trained on T-Head chips, the Zhenwu M890 is selling at scale, and the V900 is due for mass production in Q1 2027. 下一代千问正在自研芯片上训练：阿里的全栈赌局摊牌了。边缘深析 Edge Insight.</description>
+</item>
+<item>
+<title>模型开始设计芯片了：OpenAI帮AMD省出"一年进度"，5个月干完</title>
+<link>https://www.deeptaketech.jiaxi.uk/#openai-chip-design-20261122</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#openai-chip-design-20261122</guid>
+<pubDate>Sun, 22 Nov 2026 17:00:00 +0800</pubDate>
+<description>OpenAI said on November 18 that model-rewritten SystemVerilog RTL delivered up to 14% better power, performance and area on AMD's flagship GPU IP — about a year of progress in under five months — with some changes already in a taped-out design; its Jalapeño chip is about 13% and 10% smaller in its vector and matrix units. 模型开始设计芯片了：OpenAI帮AMD省出"一年进度"，5个月干完。灰度观测 Gray Observation.</description>
+</item>
+<item>
+<title>世界按秒计费：谷歌Genie 4上架API，一小时世界要363美元</title>
+<link>https://www.deeptaketech.jiaxi.uk/#genie-4-api-20261122</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#genie-4-api-20261122</guid>
+<pubDate>Sun, 22 Nov 2026 17:00:00 +0800</pubDate>
+<description>Google's world model Genie 4 reached the Gemini API on November 19: 720p at 24 frames a second with native synchronised audio, about $0.10 a second, capped at 120 seconds a session; Google lists interactive prototyping, spatial design visualisation, and training robots and AI agents as the uses. 世界按秒计费：谷歌Genie 4上架API，一小时世界要363美元。技术侧写 Tech Profile.</description>
+</item>
+<item>
+<title>全球市场收盘简报 · 2026年11月22日</title>
+<link>https://www.deeptaketech.jiaxi.uk/#market-close-20261122</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#market-close-20261122</guid>
+<pubDate>Sun, 22 Nov 2026 17:00:00 +0800</pubDate>
+<description>Markets are closed on Sunday, so Friday November 20 closes stand: the Nasdaq fell 5.28%, erasing all of its 2026 gains, the S&amp;P 500 fell for a seventh straight session, and all three major US indices are in correction; Shanghai barely held 3,500 and ChiNext is down over 49% from its June high; the Nikkei and KOSPI each fell over 5% in a day; Bitcoin slid to about $55,500 over the weekend. 全球市场收盘简报 · 2026年11月22日：周日休市沿用周五收盘，纳指抹去年内涨幅，创业板较6月高点跌超49%；比特币周末跌至约55,500美元。</description>
+</item>
+<item>
 <title>暴跌夜里的一笔2650亿美元豪赌：CrowdStrike要吞下Zscaler</title>
 <link>https://www.deeptaketech.jiaxi.uk/#crowdstrike-zscaler-deal-20261122</link>
 <guid>https://www.deeptaketech.jiaxi.uk/#crowdstrike-zscaler-deal-20261122</guid>
