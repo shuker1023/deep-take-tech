@@ -2,6 +2,55 @@
 <rss version="2.0">
 <channel>
 <item>
+<title>7500亿参数硬撬2万亿智能：智谱GLM-5.4把同一组层跑了两遍</title>
+<link>https://www.deeptaketech.jiaxi.uk/#glm-54-loop-transformer-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#glm-54-loop-transformer-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 17:00:00 +0800</pubDate>
+<description>Z.ai's GLM-5.4 loops 28 layers twice to make 750B parameters reason like a 2–3T model — but with no public benchmarks released, the claim is a vendor assertion, not a verified fact. 智谱GLM-5.4：750B参数对标2T–3T模型，但尚无公开基准背书。边缘深析 Edge Insight.</description>
+</item>
+<item>
+<title>75亿美元买一家不卖公司的公司：亚马逊为卖芯片，先买了个“翻译器”</title>
+<link>https://www.deeptaketech.jiaxi.uk/#amazon-decart-75b-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#amazon-decart-75b-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 17:00:00 +0800</pubDate>
+<description>Amazon is paying a reported $7.5B for Decart's chip-portability software and team — not the company — to make Trainium sellable in 2027. Portability cuts lock-in for everyone, including Amazon. 亚马逊75亿美元收购Decart跨芯片优化技术与团队，为2027年末对外销售Trainium铺路。技术侧写 Tech Profile.</description>
+</item>
+<item>
+<title>人形机器人第一次走进芯片产线：智元G2在长电科技上岗，干的是最怕震动的活</title>
+<link>https://www.deeptaketech.jiaxi.uk/#agibot-g2-jcet-fab-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#agibot-g2-jcet-fab-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 17:00:00 +0800</pubDate>
+<description>AgiBot's wheeled G2 robots are now handling chip trays inside JCET's packaging-and-test plant — the first humanoid entry into semiconductor back-end — but trial runs are not orders, and JCET hasn't confirmed the deployment. 智元精灵G2进入长电科技芯片测试车间，单次节拍低于25秒、成功率99.999%，半年内第三次进厂。边缘深析 Edge Insight.</description>
+</item>
+<item>
+<title>全球市场收盘简报 · 2026年11月24日</title>
+<link>https://www.deeptaketech.jiaxi.uk/#market-brief-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#market-brief-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 17:00:00 +0800</pubDate>
+<description>Wall Street roared back Monday: the Dow +3.01%, the S&amp;P 500 +4.73% and the Nasdaq +6.51%, ending a seven-day slide; A-shares faded after a hot open while the Hang Seng fell a sixth straight day and the Nikkei and KOSPI surged. 美股11月23日大幅反弹，道指+3.01%、标普+4.73%、纳指+6.51%；A股高开低走，恒生六连跌，日经+4.15%、KOSPI+6.98%。全球市场收盘简报 Market Brief.</description>
+</item>
+<item>
+<title>黄仁勋回归，英伟达一日暴涨31%</title>
+<link>https://www.deeptaketech.jiaxi.uk/#huang-returns-nvidia-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#huang-returns-nvidia-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 08:00:00 +0800</pubDate>
+<description>Nvidia jumped 31% as its board reversed itself in 11 days — but the SEC probe, Treasury deadline and Dec 1 testimony didn't go away. The rally repriced the man, not the risk. 黄仁勋回归，英伟达一日暴涨31%，纳指创2025年4月以来最佳单日；但调查一个都没结案。边缘深析 Edge Insight.</description>
+</item>
+<item>
+<title>纳指大涨6.5%，它却跌了</title>
+<link>https://www.deeptaketech.jiaxi.uk/#anthropic-junk-bond-verdict-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#anthropic-junk-bond-verdict-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 08:00:00 +0800</pubDate>
+<description>Anthropic fell 1.4% on a day the Nasdaq rose 6.5%. Stocks value it at $1.18T; bond markets expect junk. One of those two verdicts is wrong. 纳指大涨6.5%它却跌了：Anthropic的9000亿美元算力账单，债市先判了垃圾级。灰度观测 Gray Observation.</description>
+</item>
+<item>
+<title>439亿美元天价并购，买方却暴跌9%</title>
+<link>https://www.deeptaketech.jiaxi.uk/#crowdstrike-zscaler-44b-20261124</link>
+<guid>https://www.deeptaketech.jiaxi.uk/#crowdstrike-zscaler-44b-20261124</guid>
+<pubDate>Tue, 24 Nov 2026 08:00:00 +0800</pubDate>
+<description>CrowdStrike fell 9% on its $43.9B Zscaler deal while Zscaler jumped 18%. The market's verdict: the buyer overpaid — in stock — for a network it could have lived without. CrowdStrike 439亿美元全股票收购Zscaler，买方成标普500当日最差，卖方大涨18%。技术侧写 Tech Profile.</description>
+</item>
+<item>
 <title>全球市场收盘简报 · 2026年11月23日</title>
 <link>https://www.deeptaketech.jiaxi.uk/#market-brief-20261123</link>
 <guid>https://www.deeptaketech.jiaxi.uk/#market-brief-20261123</guid>
